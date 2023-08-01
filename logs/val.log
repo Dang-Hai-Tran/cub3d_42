@@ -1,0 +1,40 @@
+==1580172== Memcheck, a memory error detector
+==1580172== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1580172== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1580172== Command: ./bin/minishell
+==1580172== Parent PID: 1563809
+==1580172== 
+==1580172== Warning: noted but unhandled ioctl 0x5412 with no size/direction hints.
+==1580172==    This could cause spurious value errors to appear.
+==1580172==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==1580172== 
+==1580172== FILE DESCRIPTORS: 8 open (3 std) at exit.
+==1580172== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1580172==    <inherited from parent>
+==1580172== 
+==1580172== Open AF_UNIX socket 43: <unknown>
+==1580172==    <inherited from parent>
+==1580172== 
+==1580172== Open file descriptor 40: /usr/share/code/resources/app/node_modules.asar
+==1580172==    <inherited from parent>
+==1580172== 
+==1580172== Open file descriptor 39: /mnt/nfs/homes/datran/.config/Code/logs/20230726T125005/ptyhost.log
+==1580172==    <inherited from parent>
+==1580172== 
+==1580172== Open file descriptor 3: /mnt/nfs/homes/datran/42-Projects/minishell_repo_42/logs/val.log
+==1580172==    <inherited from parent>
+==1580172== 
+==1580172== 
+==1580172== HEAP SUMMARY:
+==1580172==     in use at exit: 208,375 bytes in 235 blocks
+==1580172==   total heap usage: 761 allocs, 526 frees, 236,481 bytes allocated
+==1580172== 
+==1580172== LEAK SUMMARY:
+==1580172==    definitely lost: 0 bytes in 0 blocks
+==1580172==    indirectly lost: 0 bytes in 0 blocks
+==1580172==      possibly lost: 0 bytes in 0 blocks
+==1580172==    still reachable: 0 bytes in 0 blocks
+==1580172==         suppressed: 208,375 bytes in 235 blocks
+==1580172== 
+==1580172== For lists of detected and suppressed errors, rerun with: -s
+==1580172== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
