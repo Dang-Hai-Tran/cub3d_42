@@ -1,21 +1,21 @@
-PROJECT_NAME := Minishell
-BIN_NAME  := minishell
+PROJECT_NAME := cub3d
+BIN_NAME  := cub3d
 CC        := cc
 ROOTDIR   := .
-SRCDIR    := srcs
-HEADERDIR := incs
+SRCDIR    := src
+HEADERDIR := inc
 LIBDIR    := lib
 BUILDDIR  := build
 BINDIR    := bin
 TARGET    := $(BINDIR)/$(BIN_NAME)
 SOURCES   := $(shell find $(SRCDIR) -type f -name '*.c' | grep -v tests)
 HEADERS   := $(shell find $(HEADERDIR) -type f -name '*.h' | grep -v tests)
-LIB       := -L./lib -lft -lreadline -lncurses
+LIB       := -L./lib -lft -lgnl -lreadline -lncurses
 LIBS      := $(shell find $(ROOTDIR) -type f -name '*.a')
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .d,$(basename $(SOURCES))))
 CFLAGS    := -Wall -Werror -Wextra -g
-INC       := -Iincs -Isrcs
+INC       := -Iinc -Isrc
 
 GREEN=`tput setaf 2`
 RED=`tput setaf 1`
@@ -36,15 +36,18 @@ all: libs $(BINDIR) $(BUILDDIR) $(OBJECTS)
 
 lib/$(PROJECT_NAME).flag: $(LIBS)
 	@make -C libft
-	@find . -type f -name *.a* -exec mv -t lib {} +
+	@make -C gnl
+	@find . -type f -name *.a* -exec gmv -t lib {} +
 	@touch $@
 	@rm -rf libft/$(BINDIR)
+	@rm -rf gnl/$(BINDIR)
 libs: $(LIBDIR) lib/$(PROJECT_NAME).flag
 
 clean:
 	$(call print_red,"Deleting the $(BUILDDIR) directory in $(PROJECT_NAME)...")
 	@rm -rf $(BUILDDIR) 
 	@make -C libft clean
+	@make -C gnl clean
 
 fclean: clean
 	$(call print_red,"Deleting the $(BINDIR) directory in $(PROJECT_NAME)...")
@@ -78,18 +81,14 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 .PHONY: clean fclean all libs
 
-# Outputs valgrind to the terminal
-# valgrind --log-file=logs/val.log --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=.ignore_readline_leaks.supp ./bin/minishell
-
-# Outputs valgrind debug logs to a log file
-# valgrind --log-file=logs/val.log --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=.ignore_readline_leaks.supp ./bin/minishell
+# valgrind --log-file=logs/val.log --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignore_leak_rl ./bin/msh
 # Remove all comments in a file : \/\*(?:[^*]|[\r\n]|(\*+(?:[^*/]|[\r\n])))*\*\/
 
 # Sur Linux
 # lib/$(PROJECT_NAME).flag: $(LIBS)
 # 	@make -C ../gnl
 # 	@make -C ../libft
-# 	@find ../ -type f -name *.a* -exec mv -t ../minishell/lib {} +
+# 	@find ../ -type f -name *.a* -exec mv -t ../cub3d/lib {} +
 # 	@touch $@
 # 	@rm -rf ../gnl/$(BINDIR)
 # 	@rm -rf ../libft/$(BINDIR)
@@ -99,7 +98,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 # lib/$(PROJECT_NAME).flag: $(LIBS)
 # 	@make -C ../gnl
 # 	@make -C ../libft
-# 	@find ../ -type f -name *.a* -exec gmv -t ../minishell/lib {} +
+# 	@find ../ -type f -name *.a* -exec gmv -t ../cub3d/lib {} +
 # 	@touch $@
 # 	@rm -rf ../gnl/$(BINDIR)
 # 	@rm -rf ../libft/$(BINDIR)

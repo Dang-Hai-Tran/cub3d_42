@@ -3,8 +3,8 @@ BIN_NAME  := libft.a
 CC        := cc
 AR        := ar rcs
 ROOTDIR   := ../
-SRCDIR    := srcs
-HEADERDIR := incs
+SRCDIR    := src
+HEADERDIR := inc
 LIBDIR    := lib
 BUILDDIR  := build
 BINDIR    := bin
@@ -16,7 +16,7 @@ LIBS      := $(shell find $(ROOTDIR) -type f -name *.a*)
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .d,$(basename $(SOURCES))))
 CFLAGS    := -Wall -Werror -Wextra
-INC       := -Iincs -Isrcs
+INC       := -Iinc -Isrc
 
 all: debug
 debug: CFLAGS += -g
