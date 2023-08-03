@@ -6,7 +6,7 @@
 /*   By: colin <colin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:58:04 by colin             #+#    #+#             */
-/*   Updated: 2023/08/02 12:38:30 by colin            ###   ########.fr       */
+/*   Updated: 2023/08/03 01:06:30 by colin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int map_reader(char *filename)
     int i;
     
     i = 0;
+    #include <fcntl.h>
+
+    #include <fcntl.h>
+
     file = open(filename, O_RDONLY);
     if (file == -1)
     {

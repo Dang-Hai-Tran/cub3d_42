@@ -1,5 +1,5 @@
-PROJECT_NAME := Libft
-BIN_NAME  := libft.a
+PROJECT_NAME := Gnl
+BIN_NAME  := libgnl.a
 CC        := cc
 AR        := ar rcs
 ROOTDIR   := ../
@@ -18,40 +18,52 @@ DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .d,$(basename $(SO
 CFLAGS    := -Wall -Werror -Wextra
 INC       := -Iinc -Isrc
 
-all: debug
-debug: CFLAGS += -g
-debug: $(TARGET)
-release: $(TARGET)
-release: CFLAGS += -O3
-
+RESET=`tput sgr0`
 GREEN=`tput setaf 2`
 RED=`tput setaf 1`
-RESET=`tput sgr0`
+YELLOW=`tput setaf 3`
+BLUE=`tput setaf 4`
+MAGENTA=`tput setaf 5`
+
+define print_yellow
+	echo "$(YELLOW)$(1)$(RESET)"
+endef
 
 define print_green
-	@echo "$(GREEN)$(1)$(RESET)"
+	echo "$(GREEN)$(1)$(RESET)"
 endef
 
 define print_red
-	@echo "$(RED)$(1)$(RESET)"
+	echo "$(RED)$(1)$(RESET)"
 endef
 
 all: $(TARGET)
 
 clean:
-	$(call print_red,"Deleting the $(BUILDDIR) directory in $(PROJECT_NAME)...")
+	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(BUILDDIR) 
 
 fclean: clean
-	$(call print_red,"Deleting the $(BINDIR) directory in $(PROJECT_NAME)...")
+	@printf "$(BLUE)Deleting the $(RESET)$(BINDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(BINDIR)
 
 re: fclean all
 
+debug: CFLAGS += -g
+debug:
+	@printf "$(MAGENTA)Debug mode enabled\n$(RESET)";
+	@$(MAKE) all
+
+release: CFLAGS += -O3
+release: 
+	@printf "$(MAGENTA)Release mode enabled\n$(RESET)";
+	@$(MAKE) all
+
 $(TARGET): $(BINDIR) $(BUILDDIR) $(OBJECTS)
-	$(call print_green,"Linking object files...")
+	@$(call print_yellow,"Linking object files")
 	@$(AR) $(TARGET) $(OBJECTS)
-	$(call print_green,"$(TARGET) has been created!")
+	@printf "$(RED)$(TARGET)$(RESET)$(GREEN) has been created!\n$(RESET)";
+	@echo "\n"
 
 $(BUILDDIR) :
 	@mkdir -p $(BUILDDIR)

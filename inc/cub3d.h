@@ -4,8 +4,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/inc/libft.h"
-# include "../gnl/inc/get_next_line.h"
+# include "../libraries/libft/inc/libft.h"
+# include "../libraries/gnl/inc/get_next_line.h"
 
 int map_parser(char *filename);
 

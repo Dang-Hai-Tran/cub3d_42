@@ -1,4 +1,4 @@
-PROJECT_NAME := cub3d
+PROJECT_NAME := Cub3d
 BIN_NAME  := cub3d
 CC        := cc
 ROOTDIR   := .
@@ -7,57 +7,87 @@ HEADERDIR := inc
 LIBDIR    := lib
 BUILDDIR  := build
 BINDIR    := bin
+LIBSRCDIR := libraries
 TARGET    := $(BINDIR)/$(BIN_NAME)
 SOURCES   := $(shell find $(SRCDIR) -type f -name '*.c' | grep -v tests)
 HEADERS   := $(shell find $(HEADERDIR) -type f -name '*.h' | grep -v tests)
 LIB       := -L./lib -lft -lgnl -lreadline -lncurses
-LIBS      := $(shell find $(ROOTDIR) -type f -name '*.a')
+LIBS      := $(shell find $(LIBDIR) -type f -name '*.a')
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
-DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .d,$(basename $(SOURCES))))
-CFLAGS    := -Wall -Werror -Wextra -g
+DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)%,$(addsuffix .d,$(basename $(SOURCES))))
+CFLAGS    := -Wall -Werror -Wextra
 INC       := -Iinc -Isrc
 
+LIB_DIRS  := $(shell find $(LIBSRCDIR) -type d -exec test -e '{}/Makefile' ';' -print)
+
+RESET=`tput sgr0`
 GREEN=`tput setaf 2`
 RED=`tput setaf 1`
-RESET=`tput sgr0`
+YELLOW=`tput setaf 3`
+BLUE=`tput setaf 4`
+MAGENTA=`tput setaf 5`
+
+define print_yellow
+	echo "$(YELLOW)$(1)$(RESET)"
+endef
 
 define print_green
-	@echo "$(GREEN)$(1)$(RESET)"
+	echo "$(GREEN)$(1)$(RESET)"
 endef
 
 define print_red
-	@echo "$(RED)$(1)$(RESET)"
+	echo "$(RED)$(1)$(RESET)"
 endef
 
-all: libs $(BINDIR) $(BUILDDIR) $(OBJECTS)
-	$(call print_green,"Linking object files...")
-	@$(CC) -o $(TARGET) $(OBJECTS) $(LIB)
-	$(call print_green,"$(TARGET) has been created!")
+debug: CFLAGS += -g
+release: CFLAGS += -O3
 
-lib/$(PROJECT_NAME).flag: $(LIBS)
-	@make -C libft
-	@make -C gnl
-	@find . -type f -name *.a* -exec gmv -t lib {} +
-	@touch $@
-	@rm -rf libft/$(BINDIR)
-	@rm -rf gnl/$(BINDIR)
+all: libs $(BINDIR) $(BUILDDIR) $(OBJECTS)
+	@$(call print_green,"Linking object files")
+	@$(CC) -o $(TARGET) $(OBJECTS) $(LIB)
+	@printf "$(RED)$(TARGET)$(RESET)$(GREEN) has been created!\n$(RESET)";
+
 libs: $(LIBDIR) lib/$(PROJECT_NAME).flag
 
+lib/$(PROJECT_NAME).flag: $(LIBS)
+	@for dir in $(LIB_DIRS); do \
+		printf "$(BLUE)Making $(RESET)$(RED)$$dir\n$(RESET)"; \
+		make -C $$dir CFLAGS="$(CFLAGS)" && mv $$dir/bin/*.a $(LIBDIR)/; \
+	done
+	@find $(LIBSRCDIR) -type d -empty -name 'bin' -delete
+	@touch $@
+
 clean:
-	$(call print_red,"Deleting the $(BUILDDIR) directory in $(PROJECT_NAME)...")
+	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(BUILDDIR) 
-	@make -C libft clean
-	@make -C gnl clean
+	@for dir in $(LIB_DIRS); do \
+		make -C $$dir clean; \
+	done
 
 fclean: clean
-	$(call print_red,"Deleting the $(BINDIR) directory in $(PROJECT_NAME)...")
+	@printf "$(BLUE)Deleting the $(RESET)$(BINDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(BINDIR)
+	@for dir in $(LIB_DIRS); do \
+		rm -rf $$dir/bin; \
+	done
 
 re: fclean all
 
 prod: fclean
-	$(call print_red,"Deleting the $(LIBDIR) directory in $(PROJECT_NAME)...")
+	@printf "$(BLUE)Deleting the $(RESET)$(LIBDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(LIBDIR)
+
+fre: fclean libs
+	@printf "$(BLUE)Deleting the $(RESET)$(LIBDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
+	@rm -rf $(LIBDIR)
+	@$(MAKE) libs
+	@$(MAKE) all
+
+debug: fre
+
+release: 
+	@printf "$(MAGENTA)Release mode enabled\n$(RESET)";
+	@$(MAKE) all
 
 $(LIBDIR) :
 	@mkdir -p $(LIBDIR)
@@ -79,27 +109,4 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 -include $(DEPS)
 
-.PHONY: clean fclean all libs
-
-# valgrind --log-file=logs/val.log --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignore_leak_rl ./bin/msh
-# Remove all comments in a file : \/\*(?:[^*]|[\r\n]|(\*+(?:[^*/]|[\r\n])))*\*\/
-
-# Sur Linux
-# lib/$(PROJECT_NAME).flag: $(LIBS)
-# 	@make -C ../gnl
-# 	@make -C ../libft
-# 	@find ../ -type f -name *.a* -exec mv -t ../cub3d/lib {} +
-# 	@touch $@
-# 	@rm -rf ../gnl/$(BINDIR)
-# 	@rm -rf ../libft/$(BINDIR)
-# libs: $(LIBDIR) lib/$(PROJECT_NAME).flag
-
-# Sur Mac
-# lib/$(PROJECT_NAME).flag: $(LIBS)
-# 	@make -C ../gnl
-# 	@make -C ../libft
-# 	@find ../ -type f -name *.a* -exec gmv -t ../cub3d/lib {} +
-# 	@touch $@
-# 	@rm -rf ../gnl/$(BINDIR)
-# 	@rm -rf ../libft/$(BINDIR)
-# libs: $(LIBDIR) lib/$(PROJECT_NAME).flag
+.PHONY: clean fclean all libs remove-empty-bin-dirs
