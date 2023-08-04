@@ -11,7 +11,7 @@ LIBSRCDIR := libraries
 TARGET    := $(BINDIR)/$(BIN_NAME)
 SOURCES   := $(shell find $(SRCDIR) -type f -name '*.c' | grep -v tests)
 HEADERS   := $(shell find $(HEADERDIR) -type f -name '*.h' | grep -v tests)
-LIB       := -L./lib -lft -lgnl -lreadline -lncurses
+LIB       := -L./lib -lft -lgnl -Lmlx -lXext -lX11 -lm -lz
 LIBS      := $(shell find $(LIBDIR) -type f -name '*.a')
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)%,$(addsuffix .d,$(basename $(SOURCES))))
@@ -52,7 +52,7 @@ libs: $(LIBDIR) lib/$(PROJECT_NAME).flag
 lib/$(PROJECT_NAME).flag: $(LIBS)
 	@for dir in $(LIB_DIRS); do \
 		printf "$(BLUE)Making $(RESET)$(RED)$$dir\n$(RESET)"; \
-		make -C $$dir CFLAGS="$(CFLAGS)" && mv $$dir/bin/*.a $(LIBDIR)/; \
+		make -C $$dir && ( mv $$dir/bin/*.a $(LIBDIR)/ || mv $$dir/*.a $(LIBDIR)/ ); \
 	done
 	@find $(LIBSRCDIR) -type d -empty -name 'bin' -delete
 	@touch $@
