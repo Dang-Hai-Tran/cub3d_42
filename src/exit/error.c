@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 15:48:01 by datran            #+#    #+#             */
-/*   Updated: 2023/08/12 15:57:52 by datran           ###   ########.fr       */
+/*   Created: 2023/08/12 15:52:12 by datran            #+#    #+#             */
+/*   Updated: 2023/08/12 15:56:09 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#include "cub3d.h"
 
-typedef struct s_display t_display;
-
-int		err_msg(char *str, int code);
-void	free_exit(t_display *display, int exit_code);
-
-
-#endif
+int	err_msg(char *str, int code)
+{
+	ft_putstr_fd("Error", STDERR_FILENO);
+	if (str)
+	{
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+	}
+	ft_putstr_fd("\n", STDERR_FILENO);
+	return (code);
+}

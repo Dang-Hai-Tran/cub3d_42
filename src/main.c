@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colin <colin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/08/02 12:51:34 by colin            ###   ########.fr       */
+/*   Updated: 2023/08/12 23:15:57 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 
 int main()
 {
-    map_parser("map.cub");
-    return 0;
+	t_display	display;
+
+	init_display(&display);
+	map_parser("map.cub");
+	return EXIT_SUCCESS;
 }

@@ -15,7 +15,8 @@ LIB       := -L./lib -lft -lgnl -Lmlx -lXext -lX11 -lm -lz
 LIBS      := $(shell find $(LIBDIR) -type f -name '*.a')
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)%,$(addsuffix .d,$(basename $(SOURCES))))
-CFLAGS    := -Wall -Werror -Wextra
+BONUS     := 0
+CFLAGS    := -Wall -Werror -Wextra -DBONUS=$(BONUS)
 INC       := -Iinc -Isrc
 
 LIB_DIRS  := $(shell find $(LIBSRCDIR) -type d -exec test -e '{}/Makefile' ';' -print)
@@ -57,6 +58,8 @@ lib/$(PROJECT_NAME).flag: $(LIBS)
 	@find $(LIBSRCDIR) -type d -empty -name 'bin' -delete
 	@touch $@
 
+bonus:
+	make all BONUS=1
 clean:
 	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(BUILDDIR) 
