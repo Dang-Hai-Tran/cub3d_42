@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:23:02 by datran            #+#    #+#             */
-/*   Updated: 2023/08/12 16:14:37 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/12 23:34:12 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_display(t_display *display)
 	init_player(display->player);
 	init_map(display->map);
 	init_text(display->text);
-	display->texture = NULL;
+	display->textures = NULL;
 }
 
 void	init_img_zero(t_img *image)
