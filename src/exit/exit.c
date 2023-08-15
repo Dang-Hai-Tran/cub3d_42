@@ -12,6 +12,26 @@
 
 #include "cub3d.h"
 
+void free_display(t_display *display)
+{
+    if (display->map)
+        free(display->map);
+    if (display->player)
+        free(display->player);
+    if (display->ray)
+        free(display->ray);
+    if (display->text)
+        free(display->text);
+    if (display->map_arr_str)
+        free(display->map_arr_str);
+    if (display->textures)
+        free(display->textures);
+    if (display->textures_pixels)
+        free(display->textures_pixels);
+    // if (display)
+    //     free(display);
+}
+
 void	free_exit(t_display *display, int exit_code)
 {
 	if (!display)
@@ -22,7 +42,8 @@ void	free_exit(t_display *display, int exit_code)
 	{
 		mlx_destroy_display(display->mlx);
 		mlx_loop_end(display->mlx);
-		free(display->mlx);
+        if (display->mlx)
+		    free(display->mlx);
 	}
 	free_display(display);
 	exit(exit_code);

@@ -12,7 +12,8 @@
 
 #include "cub3d.h"
 
-static int player_move_forward(t_display *display)
-{
-	
-}
+// static int player_move_forward(t_display *display)
+// {
+//     (void)display;
+// 	return (0);
+// }

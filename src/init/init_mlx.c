@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:38:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/12 16:28:45 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/14 13:32:31 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_mlx(t_display *display)
+void	init_gamewindow(t_display *display)
 {
 	display->mlx = mlx_init();
 	if (!display->mlx)
-		free_exit(display, err_msg("mlx init", 1));
+		ft_error_fd("Error on mlx init in init gamewindow\n", 1, display);
 	display->win = mlx_new_window(display->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	if (!display->win)
-		free_exit(display, err_msg("mlx new window", 1));
+		ft_error_fd("Error on mlx new window in init gamewindow\n", 1, display);
 	if (BONUS)
 		mlx_mouse_move(display->mlx, display->win, display->win_width / 2, display->win_height / 2);
 }
 
-void	init_texture(t_display *display, t_img *image, char *path)
+void	init_texture_struct(t_display *display, t_img *image, char *path)
 {
-	init_img_zero(image);
+	init_img_zero_struct(image);
 	image->img = mlx_xpm_file_to_image(display->mlx, path, &display->text->size, &display->text->size);
 	if (!image->img)
 		free_exit(display, err_msg("mlx xpm file to image", 1));
@@ -35,7 +35,7 @@ void	init_texture(t_display *display, t_img *image, char *path)
 
 void	init_img(t_display *display, t_img *image, int width, int height)
 {
-	init_img_zero(image);
+	init_img_zero_struct(image);
 	image->img = mlx_new_image(display->mlx, width, height);
 	if (!image->img)
 		free_exit(display, err_msg("mlx new image", 1));

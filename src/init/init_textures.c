@@ -14,4 +14,6 @@
 
 void	init_textures(t_display *display)
 {
+    (void)display;
+    return ;
 }

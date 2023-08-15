@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   helpers_map2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/08/15 11:30:06 by codespace        ###   ########.fr       */
+/*   Created: 2023/08/15 11:23:46 by codespace         #+#    #+#             */
+/*   Updated: 2023/08/15 11:25:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	check_outer_wall(t_map *map, int i, t_display *display)
 {
-	t_display	display;
+	int	j;
+	int	row_length;
 
-	if (argc != 2)
+	row_length = ft_strlen(map->pos[i]);
+	j = 0;
+	while (j < row_length)
 	{
-		ft_putstr_fd("Error\nWrong number of arguments\n", 1);
-		return (EXIT_FAILURE);
+		if (map->pos[i][j] != '1' && map->pos[i][j] != ' ')
+			ft_error_fd("Rows are not walled correctly!\n", 1, display);
+		j++;
 	}
-	else
-		init_struct(&display, argv[1]);
-	return (EXIT_SUCCESS);
 }

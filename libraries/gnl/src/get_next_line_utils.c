@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colin <colin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:46:57 by copeugne          #+#    #+#             */
-/*   Updated: 2023/08/02 12:40:20 by colin            ###   ########.fr       */
+/*   Updated: 2023/08/15 08:00:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_reset(char **str)
 	return ;
 }
 
-char	*ft_substr(char const *s, size_t start, size_t len)
+char	*ft_substr(char const *s, int start, size_t len)
 {
 	size_t		i;
 	char		*tmp;

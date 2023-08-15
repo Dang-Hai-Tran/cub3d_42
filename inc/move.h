@@ -13,7 +13,6 @@
 #ifndef MOVE_H
 # define MOVE_H
 
-# include "cub3d.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
 
@@ -22,11 +21,11 @@
 typedef struct s_img t_img;
 typedef struct s_text t_text;
 typedef struct s_map t_map;
-typedef struct s_ray t_ray;
 typedef struct s_player t_player;
+typedef struct s_ray t_ray;
 typedef struct s_display t_display;
 
-void	input_listen(t_display *display);
+// void	input_listen(t_display *display);
 
 
 #endif
