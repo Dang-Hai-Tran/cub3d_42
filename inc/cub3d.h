@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/14 15:02:33 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/15 11:37:42 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,23 @@ typedef struct s_img
 	int			endian;
 }	t_img;
 
-typedef struct s_text
+typedef struct s_textureInfo
 {
-	char		*north;
-	char		*south;
-	char		*west;
-	char		*east;
-	int			*floor;
-	int			*ceiling;
+	char				*north;
+	char				*south;
+	char				*west;
+	char				*east;
+	int					*floor;
+	int					*ceiling;
 	unsigned long		hex_floor;
 	unsigned long		hex_ceiling;
-	int			size;
-	int			index;
-	double		step;
-	double		pos;
-	int			x;
-	int			y;
-}	t_text;
+	int					size;
+	int					index;
+	double				step;
+	double				pos;
+	int					x;
+	int					y;
+}	t_textureInfo;
 
 typedef struct s_map
 {
@@ -109,7 +109,5 @@ enum e_direction
 	SOUTH = 2,
 	WEST = 3,
 };
-
-int map_parser(char *filename);
 
 #endif
