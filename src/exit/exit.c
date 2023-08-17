@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:40:46 by datran            #+#    #+#             */
-/*   Updated: 2023/08/16 19:56:39 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/17 01:31:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 
 void	free_display(t_display *display)
 {
+	int i;
+
+	i = 0;
+	while (i < display->map->rows)
+	{
+		if (display->map->pos[i])
+			free(display->map->pos[i]);
+		i++;
+	}
+	if (display->map->pos)
+		free(display->map->pos);
 	if (display->map)
 		free(display->map);
 	if (display->player)
