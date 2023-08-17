@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:23:46 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/17 00:57:09 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/17 01:22:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int is_map_line(char *line)
 	
 	i = 0;
 	found_one = 0;
-    while (line[i] != '\0') {
+    while (line[i] != '\0')
+	{
         if (line[i] != ' ' &&  line[i] != '1'
             && line[i] != '0' && line[i] != 'N'
             && line[i] != 'S' && line[i] != 'E' 

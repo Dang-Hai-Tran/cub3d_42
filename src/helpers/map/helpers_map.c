@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:18:02 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/17 01:15:03 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/17 01:22:30 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void nb_rowcols(t_display *display, int fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		i = 0;
-		if (is_map_line(line) == 1) {
+		if (is_map_line(line) == 1)
+		{
 			printf("line: %s\n", line);
 			while (line[i] != '\0')
 				i++;
