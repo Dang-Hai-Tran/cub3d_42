@@ -6,24 +6,17 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 12:44:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 11:28:13 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/16 18:22:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
-#include "cub3d.h"
+# include "cub3d.h"
 
-# define	WIN_HEIGHT	540
-# define	WIN_WIDTH	720
-
-typedef struct s_img t_img;
-typedef struct s_text t_text;
-typedef struct s_map t_map;
-typedef struct s_player t_player;
-typedef struct s_ray t_ray;
-typedef struct s_display t_display;
+# define WIN_HEIGHT	540
+# define WIN_WIDTH	720
 
 void	init_display_struct(t_display *display);
 void	init_img_zero_struct(t_img *image);

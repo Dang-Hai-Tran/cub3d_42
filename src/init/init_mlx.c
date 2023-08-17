@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:38:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/14 13:32:31 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/16 10:55:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_gamewindow(t_display *display)
 void	init_texture_struct(t_display *display, t_img *image, char *path)
 {
 	init_img_zero_struct(image);
-	image->img = mlx_xpm_file_to_image(display->mlx, path, &display->text->size, &display->text->size);
+	image->img = mlx_xpm_file_to_image(display->mlx, path, &display->textureInfo->size, &display->textureInfo->size);
 	if (!image->img)
 		free_exit(display, err_msg("mlx xpm file to image", 1));
 	image->addr = (int *)mlx_get_data_addr(image->img, &image->pixel_bits, &image->size_line, &image->endian);

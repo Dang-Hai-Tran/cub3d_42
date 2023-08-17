@@ -21,7 +21,5 @@ void	init_map(t_display *display, char *filename)
 		ft_error_fd("Map not found\n", 1, display);
 	create_map(display, fd);
 	close(fd);
-	load_map(display, filename);
-	is_map_walled(display->map, display);
 	// entity_parser(display);
 }

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 11:37:42 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/16 21:53:10 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,21 @@ typedef struct s_textureInfo
 	char				*south;
 	char				*west;
 	char				*east;
-	int					*floor;
-	int					*ceiling;
-	unsigned long		hex_floor;
-	unsigned long		hex_ceiling;
+	unsigned long		*floor_rgb;
+	unsigned long		*ceiling_rgb;
 	int					size;
 	int					index;
 	double				step;
 	double				pos;
 	int					x;
 	int					y;
-}	t_textureInfo;
+}	t_textureinfo;
 
 typedef struct s_map
 {
 	int		fd;
 	char	*filename;
+	char	*line;
 	int		rows;
 	int		cols;
 	char	**pos;
@@ -89,17 +88,17 @@ typedef struct s_ray
 
 typedef struct s_display
 {
-	void		*mlx;
-	void		*win;
-	int			win_height;
-	int			win_width;
-	t_map		*map;
-	t_player	*player;
-	t_ray		*ray;
-	t_text		*text;
-	char		**map_arr_str;
-	int			**textures;
-	int			**textures_pixels;
+	void			*mlx;
+	void			*win;
+	int				win_height;
+	int				win_width;
+	t_map			*map;
+	t_player		*player;
+	t_ray			*ray;
+	t_textureinfo	*textureInfo;
+	char			**map_arr_str;
+	int				**textures;
+	int				**textures_pixels;
 }	t_display;
 
 enum e_direction

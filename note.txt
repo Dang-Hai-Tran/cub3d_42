@@ -37,12 +37,16 @@ C 225,30,0
 · R,G,B colors in range [0,255]: 0, 255, 255
 
 file layout :
-[DIRECTION_1] [TEXTURE_PATH_1]
-[DIRECTION_2] [TEXTURE_PATH_2]
-[DIRECTION_3] [TEXTURE_PATH_3]
-[DIRECTION_4] [TEXTURE_PATH_4]
+[DIRECTION_1] (Any amount of whitespaces) [TEXTURE_PATH_1]
+[DIRECTION_2] (Any amount of whitespaces) [TEXTURE_PATH_2]
+[DIRECTION_3] (Any amount of whitespaces) [TEXTURE_PATH_3]
+[DIRECTION_4] (Any amount of whitespaces) [TEXTURE_PATH_4]
 
-[FLOOR_COLOR] [RGB_1]
-[CEILING_COLOR] [RGB_2]
+(Any amount of whitespaces or newlines)
+
+[FLOOR_COLOR] (Any amount of whitespaces) [RGB_1]
+[CEILING_COLOR] (Any amount of whitespaces) [RGB_2]
+
+(Any amount of whitespaces or newlines)
 
 [MAP]

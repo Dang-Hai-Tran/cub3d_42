@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/08/15 11:30:06 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/17 01:17:19 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	else
+	{
 		init_struct(&display, argv[1]);
+		parse_map_file(&display, argv[1]);
+		// print_map(&display);
+	}
 	return (EXIT_SUCCESS);
 }

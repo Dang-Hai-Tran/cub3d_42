@@ -3,10 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:40 by datran            #+#    #+#             */
-/*   Updated: 2023/08/12 23:25:41 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/16 18:23:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RAYCASTING_H
+# define RAYCASTING_H
+
+# include "cub3d.h"
+#endif

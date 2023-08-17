@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:46:57 by datran            #+#    #+#             */
-/*   Updated: 2023/08/12 23:09:47 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/16 18:31:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	init_textures(t_display *display)
 {
-    (void)display;
-    return ;
+	(void)display;
+	return ;
 }
