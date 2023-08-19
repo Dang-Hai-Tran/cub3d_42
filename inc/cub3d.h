@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/13 17:05:17 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/15 10:37:15 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,17 @@
 # include "exit.h"
 # include "init.h"
 # include "move.h"
-# include "raycasting.h"
+# include "raycaster.h"
 
 # define BONUS 0
 
 typedef struct s_img t_img;
-typedef struct s_text t_text;
-typedef struct s_map t_map;
+typedef struct s_texinfo t_texinfo;
+typedef struct s_mapinfo t_mapinfo;
 typedef struct s_ray t_ray;
 typedef struct s_player t_player;
 typedef struct s_display t_display;
+typedef enum e_dir t_dir;
 
 typedef struct s_img
 {
@@ -48,38 +49,42 @@ typedef struct s_img
 	int			endian;
 }	t_img;
 
-typedef struct s_text
+typedef struct s_texinfo
 {
-	char		*north;
-	char		*south;
-	char		*west;
-	char		*east;
-	int			*floor;
-	int			*ceiling;
+	char				*north;
+	char				*south;
+	char				*west;
+	char				*east;
+	int					*floor;
+	int					*ceiling;
 	unsigned long		hex_floor;
 	unsigned long		hex_ceiling;
-	int			size;
-	int			index;
-	double		step;
-	double		pos;
-	int			x;
-	int			y;
-}	t_text;
+	int					size;
+	int					index;
+	double				step;
+	double				pos;
+	int					x;
+	int					y;
+}	t_texinfo;
 
-typedef struct s_map
+typedef struct s_mapinfo
 {
 	int		fd;
 	int		line_count;
 	char	*path;
-	char	**file;
 	int		height;
 	int		width;
-}	t_map;
+}	t_mapinfo;
 
 typedef struct s_player
 {
+	t_dir		dir;
 	double		pos_x;
 	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 	int			has_moved;
 	int			move_x;
 	int			move_y;
@@ -88,32 +93,47 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double		camera;
-
+	double		camera_x;
+	double		dir_x;
+	double		dir_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	double		sidedist_x;
+	double		sidedist_y;
+	double		deltadist_x;
+	double		deltadist_y;
+	double		wall_dist;
+	double		wall_x;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 }	t_ray;
 
 typedef struct s_display
 {
-	void		*mlx;
-	void		*win;
-	int			win_height;
-	int			win_width;
-	t_map		*map;
-	t_player	*player;
-	t_ray		*ray;
-	t_text		*text;
-	char		**map_arr_str;
-	int			**textures;
-	int			**textures_pixels;
+	void			*mlx;
+	void			*win;
+	int				win_height;
+	int				win_width;
+	t_mapinfo		*mapinfo;
+	t_player		*player;
+	t_ray			*ray;
+	t_texinfo		*texinfo;
+	char			**map;
+	int				**textures;
+	int				**textures_pixels;
 }	t_display;
 
-enum e_direction
+typedef enum e_dir
 {
 	NORTH = 0,
 	EAST = 1,
 	SOUTH = 2,
 	WEST = 3,
-};
+}	t_dir;
 
 int map_parser(char *filename);
 

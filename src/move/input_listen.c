@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:24:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/13 17:07:31 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/15 10:15:03 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int key_press_handler(int key, t_display *display)
 	if (key == XK_w)
 		display->player->move_y = 1;
 	if (key == XK_s)
-		display->player->move_x = -1;
+		display->player->move_y = -1;
 	if (key == XK_a)
 		display->player->move_x = -1;
 	if (key == XK_d)

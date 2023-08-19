@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:38:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/12 16:28:45 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/15 11:16:58 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_mlx(t_display *display)
 void	init_texture(t_display *display, t_img *image, char *path)
 {
 	init_img_zero(image);
-	image->img = mlx_xpm_file_to_image(display->mlx, path, &display->text->size, &display->text->size);
+	image->img = mlx_xpm_file_to_image(display->mlx, path, &display->texinfo->size, &display->texinfo->size);
 	if (!image->img)
 		free_exit(display, err_msg("mlx xpm file to image", 1));
 	image->addr = (int *)mlx_get_data_addr(image->img, &image->pixel_bits, &image->size_line, &image->endian);

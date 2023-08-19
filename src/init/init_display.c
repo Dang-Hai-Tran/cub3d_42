@@ -6,23 +6,22 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:23:02 by datran            #+#    #+#             */
-/*   Updated: 2023/08/12 23:34:12 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/15 11:06:54 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void init_map(t_map *map)
+static void init_mapinfo(t_mapinfo *mapinfo)
 {
-	map->fd = 0;
-	map->line_count = 0;
-	map->path = NULL;
-	map->file = NULL;
-	map->height = 0;
-	map->width = 0;
+	mapinfo->fd = 0;
+	mapinfo->line_count = 0;
+	mapinfo->path = NULL;
+	mapinfo->height = 0;
+	mapinfo->width = 0;
 }
 
-static void init_player(t_player *player)
+static void init_player_zero(t_player *player)
 {
 	player->pos_x = 0.0;
 	player->pos_y = 0.0;
@@ -38,9 +37,11 @@ void	init_display(t_display *display)
 	display->win = NULL;
 	display->win_height = WIN_HEIGHT;
 	display->win_width = WIN_WIDTH;
-	init_player(display->player);
-	init_map(display->map);
-	init_text(display->text);
+	init_player_zero(display->player);
+	init_mapinfo(display->mapinfo);
+	init_texinfo(display->texinfo);
+	display->map = NULL;
+	display->textures_pixels = NULL;
 	display->textures = NULL;
 }
 
