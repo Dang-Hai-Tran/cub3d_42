@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:24:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 10:15:03 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/20 10:13:55 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,26 @@ static int key_release_handler(int key, t_display *display)
 	return (0);
 }
 
+static int	mouse_motion_handler(int x, int y, t_display *display)
+{
+	static int	old_x = WIN_WIDTH / 2;
+
+	if (x == old_x)
+		return (0);
+	else if (x < old_x)
+		display->player->has_moved += rotate_player(display, -1);
+	else if (x > old_x)
+		display->player->has_moved += rotate_player(display, 1);
+	old_x = x;
+	return (0);
+}
+
 void	input_listen(t_display *display)
 {
+	mlx_hook(display->win, ClientMessage, NoEventMask, quit_cub3d, display);
 	mlx_hook(display->win, KeyPress, KeyPressMask, key_press_handler, display);
 	mlx_hook(display->win, KeyRelease, KeyReleaseMask, key_release_handler, display);
+	if (BONUS)
+		mlx_hook(display->win, MotionNotify, PointerMotionMask,
+			mouse_motion_handler, display);
 }
