@@ -6,14 +6,13 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:36 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 10:28:24 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/20 10:36:27 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MOVE_H
 # define MOVE_H
 
-# include "cub3d.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
 

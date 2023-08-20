@@ -23,3 +23,10 @@ int	err_msg(char *str, int code)
 	ft_putstr_fd("\n", STDERR_FILENO);
 	return (code);
 }
+
+void	ft_error_fd(char *str, int fd, t_display *display)
+{
+	ft_putstr_fd(str, fd);
+	free_exit(display, 1);
+	exit(1);
+}

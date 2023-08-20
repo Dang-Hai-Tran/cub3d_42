@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 11:20:58 by datran            #+#    #+#             */
-/*   Updated: 2023/08/18 22:18:51 by datran           ###   ########.fr       */
+/*   Created: 2023/08/12 16:46:57 by datran            #+#    #+#             */
+/*   Updated: 2023/08/20 10:35:19 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	xpm_to_img(t_display *display, char *path)
+static int	*xpm_to_img(t_display *display, char *path)
 {
 	t_img	image;
 	int		*buf;

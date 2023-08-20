@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/08/17 01:26:32 by codespace        ###   ########.fr       */
+/*   Created: 2023/08/14 14:54:13 by codespace         #+#    #+#             */
+/*   Updated: 2023/08/17 00:27:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef MAP_H
+# define MAP_H
 
-int	main(int argc, char **argv)
-{
-	t_display	display;
+# include "cub3d.h"
 
-	if (argc != 2)
-	{
-		ft_putstr_fd("Error\nWrong number of arguments\n", 1);
-		return (EXIT_FAILURE);
-	}
-	else
-	{
-		init_struct(&display, argv[1]);
-		parse_map_file(&display, argv[1]);
-		free_exit(&display, 0);
-		// print_map(&display);
-	}
-	return (EXIT_SUCCESS);
-}
+void		fill_map(t_display *display, char *filename);
+int			is_map_walled(t_map	*map, t_display *display);
+void		create_map(t_display *display, int fd);
+int			parse_texture_path(char *line, char **path);
+int			parse_rgb_color(char *line, unsigned long *rgb);
+t_display	*parse_map_file(t_display *display, char *filename);
+
+#endif

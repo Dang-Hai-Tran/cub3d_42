@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_map_struct.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/08/17 01:26:32 by codespace        ###   ########.fr       */
+/*   Created: 2023/08/14 13:28:42 by codespace         #+#    #+#             */
+/*   Updated: 2023/08/14 13:29:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	init_map(t_display *display, char *filename)
 {
-	t_display	display;
+	int	fd;
 
-	if (argc != 2)
-	{
-		ft_putstr_fd("Error\nWrong number of arguments\n", 1);
-		return (EXIT_FAILURE);
-	}
-	else
-	{
-		init_struct(&display, argv[1]);
-		parse_map_file(&display, argv[1]);
-		free_exit(&display, 0);
-		// print_map(&display);
-	}
-	return (EXIT_SUCCESS);
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		ft_error_fd("Map not found\n", 1, display);
+	create_map(display, fd);
+	close(fd);
+	// entity_parser(display);
 }

@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 10:37:15 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/20 10:26:19 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include "exit.h"
 # include "init.h"
 # include "move.h"
+# include "helpers.h"
+# include "map.h"
 # include "raycaster.h"
 
 # define BONUS 0
@@ -135,6 +137,5 @@ typedef enum e_dir
 	WEST = 3,
 }	t_dir;
 
-int map_parser(char *filename);
 
 #endif

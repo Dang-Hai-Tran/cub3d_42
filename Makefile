@@ -11,12 +11,12 @@ LIBSRCDIR := libraries
 TARGET    := $(BINDIR)/$(BIN_NAME)
 SOURCES   := $(shell find $(SRCDIR) -type f -name '*.c' | grep -v tests)
 HEADERS   := $(shell find $(HEADERDIR) -type f -name '*.h' | grep -v tests)
-LIB       := -L./lib -lft -lgnl -Lmlx -lXext -lX11 -lm -lz
+LIB       := -L./lib -Lmlx -lft -lgnl -lmlx -lmlx_Linux -lXext -lX11 -lm -lz
 LIBS      := $(shell find $(LIBDIR) -type f -name '*.a')
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)%,$(addsuffix .d,$(basename $(SOURCES))))
 BONUS     := 0
-CFLAGS    := -Wall -Werror -Wextra -DBONUS=$(BONUS)
+CFLAGS    := -Wall -Wextra -Werror -g3 -DBONUS=$(BONUS)
 INC       := -Iinc -Isrc
 
 LIB_DIRS  := $(shell find $(LIBSRCDIR) -type d -exec test -e '{}/Makefile' ';' -print)
