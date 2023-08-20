@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:48:01 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 10:26:54 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/20 11:06:07 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_player t_player;
 typedef struct s_display t_display;
 
 void	free_exit(t_display *display, int exit_code);
+int		err_msg(char *str, int code);
 int		quit_cub3d(t_display *display);
 void	free_arr(void **arr);
 void	free_display(t_display *display);

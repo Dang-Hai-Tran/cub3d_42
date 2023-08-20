@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 10:26:19 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/20 12:22:29 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_texinfo
 	int					*ceiling;
 	unsigned long		hex_floor;
 	unsigned long		hex_ceiling;
+	unsigned long		*ceiling_rgb;
+	unsigned long		*floor_rgb;
 	int					size;
 	int					index;
 	double				step;
@@ -76,6 +78,8 @@ typedef struct s_mapinfo
 	char	*path;
 	int		height;
 	int		width;
+	int		rows;
+	int		cols;
 }	t_mapinfo;
 
 typedef struct s_player

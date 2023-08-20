@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:18:02 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/17 01:22:30 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/20 12:17:56 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void nb_rowcols(t_display *display, int fd)
 	int i;
 	char *line;
 
-	display->map->rows = 0;
-	display->map->cols = 0;
+	display->mapinfo->rows = 0;
+	display->mapinfo->cols = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		i = 0;
@@ -27,10 +27,10 @@ void nb_rowcols(t_display *display, int fd)
 			printf("line: %s\n", line);
 			while (line[i] != '\0')
 				i++;
-			display->map->rows++;
+			display->mapinfo->rows++;
 		}
-		if (display->map->cols < i)
-			display->map->cols = i;
+		if (display->mapinfo->cols < i)
+			display->mapinfo->cols = i;
 		free(line);  // Free the memory allocated by get_next_line
 	}
 }
@@ -57,7 +57,7 @@ int	is_map_rectangle(t_display *display, int len2)
 {
 	int	len1;
 
-	len1 = display->map->cols;
+	len1 = display->mapinfo->cols;
 	if (len1 != len2)
 		return (1);
 	return (0);
@@ -72,14 +72,14 @@ int	is_adjacent_char_valid(char current, char neighbor)
 	return (1);
 }
 
-void	fill_adjacents(char *directions, t_map *map, int i, int j, int row_length)
+void	fill_adjacents(char *directions, t_mapinfo *mapinfo, int i, int j, int row_length)
 {
 	if (i > 0)
-		directions[0] = map->pos[i - 1][j];
-	if (i < map->rows - 1)
-		directions[1] = map->pos[i + 1][j];
+		directions[0] = mapinfo->pos[i - 1][j];
+	if (i < mapinfo->rows - 1)
+		directions[1] = mapinfo->pos[i + 1][j];
 	if (j > 0)
-		directions[2] = map->pos[i][j - 1];
+		directions[2] = mapinfo->pos[i][j - 1];
 	if (j < row_length - 1)
-		directions[3] = map->pos[i][j + 1];
+		directions[3] = mapinfo->pos[i][j + 1];
 }

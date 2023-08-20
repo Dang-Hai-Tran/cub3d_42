@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:58:04 by colin             #+#    #+#             */
-/*   Updated: 2023/08/17 01:32:06 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/20 12:11:55 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,30 @@ void	create_map(t_display *display, int fd)
 
 	i = 0;
 	nb_rowcols(display, fd);
-	printf("rows: %d, cols: %d\n", display->map->rows, display->map->cols);
-	display->map->pos = (char **)malloc(sizeof(char *) * (display->map->rows));
-	if (!display->map->pos)
+	printf("rows: %d, cols: %d\n", display->mapinfo->rows, display->mapinfo->cols);
+	display->mapinfo->pos = (char **)malloc(sizeof(char *) * (display->mapinfo->rows));
+	if (!display->mapinfo->pos)
 		ft_error_fd("Error on create map\n", 1, display);
-	while (i < display->map->rows)
+	while (i < display->mapinfo->rows)
 	{
-		display->map->pos[i] = (char *)malloc(sizeof(char) * (display->map->rows + 1));
-		if (!display->map->pos[i])
+		display->mapinfo->pos[i] = (char *)malloc(sizeof(char) * (display->map->rows + 1));
+		if (!display->mapinfo->pos[i])
 			ft_error_fd("Error on create map\n", 1, display);
 		i++;
 	}
 	i = 0;
-	display->map->exists = 1;
-	while (i < display->map->rows)
+	display->mapinfo->exists = 1;
+	while (i < display->mapinfo->rows)
 	{
-		display->map->pos[i] = (char *)malloc(sizeof(char)
-				* (display->map->cols));
-		if (!display->map->pos[i])
+		display->mapinfo->pos[i] = (char *)malloc(sizeof(char)
+				* (display->mapinfo->cols));
+		if (!display->mapinfo->pos[i])
 			ft_error_fd("Error on create map\n", 1, display);
 		i++;
 	}
 }
 
-int	is_map_walled(t_map *map, t_display *display)
+int	is_map_walled(t_mapinfo *mapinfo, t_display *display)
 {
 	int		i;
 	int		j;
@@ -50,37 +50,37 @@ int	is_map_walled(t_map *map, t_display *display)
 	char	last_non_space_char;
 
 	i = 0;
-	while (i < map->rows)
+	while (i < mapinfo->rows)
 	{
 		// printf("map->pos[%d]: %s\n", i, map->pos[i]);
-		row_length = ft_strlen(map->pos[i]);
+		row_length = ft_strlen(mapinfo->pos[i]);
 		printf("row_length: %d\n", row_length);
 		first_non_space_char = 0;
 		last_non_space_char = 0;
 		j = 0;
 		while (j < row_length && !first_non_space_char) 
 		{
-			if (map->pos[i][j] != ' ')
-				first_non_space_char = map->pos[i][j];
+			if (mapinfo->pos[i][j] != ' ')
+				first_non_space_char = mapinfo->pos[i][j];
 			j++;
 		}
 		j = row_length - 1;
 		while (j >= 0 && !last_non_space_char) 
 		{
-			if (map->pos[i][j] != ' ')
-				last_non_space_char = map->pos[i][j];
+			if (mapinfo->pos[i][j] != ' ')
+				last_non_space_char = mapinfo->pos[i][j];
 			j--;
 		}
 		if (first_non_space_char != '1' || last_non_space_char != '1') 
 			ft_error_fd("Columns are not walled correctly!\n", 1, display);
-		if (i == 0 || i == map->rows - 1)
-			check_outer_wall(map, i, display);
+		if (i == 0 || i == mapinfo->rows - 1)
+			check_outer_wall(mapinfo, i, display);
 		else 
 		{
 			j = 1;
 			while (j < row_length - 1)
 			{
-				if (map->pos[i][j] == '0' && !is_adjacent_valid(map, i, j))
+				if (mapinfo->pos[i][j] == '0' && !is_adjacent_valid(mapinfo, i, j))
 					ft_error_fd("0 is not surrounded correctly!\n", 1, display);
 				j++;
 			}
@@ -109,14 +109,14 @@ void	fill_map(t_display *display, char *filename)
 		line_length = ft_strlen(line);
 		if (is_map_line(line) == 1)
 		{
-			while (++j < display->map->cols)
+			while (++j < display->mapinfo->cols)
 			{
 				// printf("line: %s\n", line);
 				// printf("i: %d, j: %d, cols: %d, line length: %u\n", i, j, display->map->cols, line_length);
 				if (j < line_length)
 				{
 					// printf("i: %d, j: %d, cols: %d, line length: %u\n", i, j, display->map->cols, line_length);
-					display->map->pos[i][j] = line[j];
+					display->mapinfo->pos[i][j] = line[j];
 				}
 			}
 			i++;
@@ -151,7 +151,7 @@ t_display	*parse_map_file(t_display *display, char *filename)
 		}
 		if (ft_strncmp(line, "NO", 2) == 0)
 		{
-			if (parse_texture_path(line, &display->textureInfo->north) < 0)
+			if (parse_texture_path(line, &display->texinfo->north) < 0)
 			{
 				perror("Error parsing north texture path");
 				exit(1);
@@ -160,7 +160,7 @@ t_display	*parse_map_file(t_display *display, char *filename)
 		}
 		else if (ft_strncmp(line, "SO", 2) == 0) 
 		{
-			if (parse_texture_path(line, &display->textureInfo->south) < 0)
+			if (parse_texture_path(line, &display->texinfo->south) < 0)
 			{
 				perror("Error parsing south texture path");
 				exit(1);
@@ -169,7 +169,7 @@ t_display	*parse_map_file(t_display *display, char *filename)
 		}
 		else if (ft_strncmp(line, "WE", 2) == 0)
 		{
-			if (parse_texture_path(line, &display->textureInfo->west) < 0)
+			if (parse_texture_path(line, &display->texinfo->west) < 0)
 			{
 				perror("Error parsing west texture path");
 				exit(1);
@@ -178,7 +178,7 @@ t_display	*parse_map_file(t_display *display, char *filename)
 		}
 		else if (ft_strncmp(line, "EA", 2) == 0)
 		{
-			if (parse_texture_path(line, &display->textureInfo->east) < 0)
+			if (parse_texture_path(line, &display->texinfo->east) < 0)
 			{
 				perror("Error parsing east texture path");
 				exit(1);
@@ -192,7 +192,7 @@ t_display	*parse_map_file(t_display *display, char *filename)
 				perror("Error parsing floor RGB colors");
 				exit(1);
 			}
-			display->textureInfo->floor_rgb = floor_rgb;
+			display->texinfo->floor_rgb = floor_rgb;
 			// printf("display->textureInfo->floor: %d, %d, %d\n", display->textureInfo->floor[0], display->textureInfo->floor[1], display->textureInfo->floor[2]);
 		}
 		else if (line[0] == 'C')
@@ -202,7 +202,7 @@ t_display	*parse_map_file(t_display *display, char *filename)
 				perror("Error parsing ceiling RGB colors");
 				exit(1);
 			}
-			display->textureInfo->ceiling_rgb = ceiling_rgb;
+			display->texinfo->ceiling_rgb = ceiling_rgb;
 			// printf("display->textureInfo->ceiling: %d, %d, %d\n", display->textureInfo->ceiling[0], display->textureInfo->ceiling[1], display->textureInfo->ceiling[2]);
 		}
 		else

@@ -18,8 +18,6 @@ void	init_map(t_display *display, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_error_fd("Map not found\n", 1, display);
+		free_exit(display, err_msg("Open map file", 1));
 	create_map(display, fd);
-	close(fd);
-	// entity_parser(display);
 }

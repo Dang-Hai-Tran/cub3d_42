@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 12:44:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 10:30:31 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/20 11:30:01 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ typedef struct s_ray t_ray;
 typedef struct s_player t_player;
 typedef struct s_display t_display;
 
-void	init_display_struct(t_display *display);
-void	init_img_zero_struct(t_img *image);
+void	init_display(t_display *display);
+void	init_img_zero(t_img *image);
 void	init_gamewindow(t_display *display);
-void	init_texture_struct(t_display *display, t_img *image, char *path);
+void	init_texture(t_display *display, t_img *image, char *path);
 void	init_img(t_display *display, t_img *image, int width, int height);
 void	init_player_dir(t_player *player);
 void	init_texinfo(t_texinfo *texinfo);
