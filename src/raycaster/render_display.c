@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 09:42:18 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 09:53:51 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/22 18:00:02 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	set_frame_image_pixel(t_display *display, t_img *image, int x, int y
 		set_image_pixel(image, x, y, display->textures_pixels[y][x]);
 	else if (y < display->win_height / 2)
 		set_image_pixel(image, x, y, display->texinfo->hex_ceiling);
-	else if (y < display->win_height -1)
+	else if (y < display->win_height - 1)
 		set_image_pixel(image, x, y, display->texinfo->hex_floor);
 }
 
@@ -48,7 +48,7 @@ static void	render_frame(t_display *display)
 static void	render_raycaster(t_display *display)
 {
 	init_texture_pixels(display);
-	init_ray(&display->ray);
+	init_ray(display->ray);
 	perform_raycaster(display);
 	render_frame(display);
 }
@@ -62,7 +62,7 @@ void	render_images(t_display *display)
 
 int	render_display(t_display *display)
 {
-	display->player->has_moved += move_player(display);
+	display->player->has_moved += player_move(display);
 	if (display->player->has_moved == 0)
 		return (0);
 	render_images(display);

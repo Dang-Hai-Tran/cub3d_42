@@ -6,20 +6,24 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/08/20 11:15:04 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/22 18:40:59 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 int	main(int argc, char **argv)
 {
 	t_display	display;
 
-	if (argc != 2)
-		return (err_msg("Wrong number of arguments", 1));
-	init_struct(&display, argv[1]);
-	parse_map_file(&display, argv[1]);
-	return (0);
+	init_display(&display);
+	if (parsing_args(argc, argv, &display) == FAIL)
+		free_exit(&display, FAIL);
+	init_mlx(&display);
+	init_textures(&display);
+	render_images(&display);
+	input_listen(&display);
+	mlx_loop_hook(display.mlx, render_display, &display);
+	mlx_loop(display.mlx);
+	return (SUCCESS);
 }

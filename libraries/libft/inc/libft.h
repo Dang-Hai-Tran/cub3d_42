@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:26:59 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 08:00:23 by codespace        ###   ########.fr       */
+/*   Updated: 2023/07/23 11:17:53 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_isspace(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
-int		ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 void	*ft_memset(void *str, int c, size_t n);
 void	ft_bzero(void *str, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -44,7 +44,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
-char	*ft_substr(char const *s, int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
@@ -86,5 +86,15 @@ int		ft_hexadecimal_format(unsigned int value);
 int		ft_upper_case_hexadecimal_format(unsigned int value);
 int		ft_percent_format(char c);
 int		ft_is_argument(int c);
+
+// get_next_line
+# define BUFFER_SIZE 42
+
+char	*ft_strchr_gnl(char *str, int c);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*ft_gnl(int fd);
+
+// ft_readline
+char	*ft_readline(int fd);
 
 #endif

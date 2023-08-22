@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:24:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 10:19:29 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/22 11:21:14 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,19 @@ static int	mouse_motion_handler(int x, int y, t_display *display)
 {
 	static int	old_x = WIN_WIDTH / 2;
 
+	(void)y;
 	if (x == old_x)
 		return (0);
 	else if (x < old_x)
-		display->player->has_moved += rotate_player(display, -1);
+	{
+		display->player->rotate = -1;
+		display->player->has_moved += player_rotate(display);
+	}
 	else if (x > old_x)
-		display->player->has_moved += rotate_player(display, 1);
+	{
+		display->player->rotate = 1;
+		display->player->has_moved += player_rotate(display);
+	}
 	old_x = x;
 	return (0);
 }

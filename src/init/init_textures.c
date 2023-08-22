@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:46:57 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 10:35:19 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/22 23:15:18 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	*xpm_to_img(t_display *display, char *path)
 	init_texture(display, &image, path);
 	buf = ft_calloc(1, sizeof * buf * display->texinfo->size * display->texinfo->size);
 	if (!buf)
-		free_exit(display, err_msg("malloc", STDERR_FILENO));
+		free_exit(display, err_msg("calloc buf xpm to img", 1));
 	y = 0;
 	while (y < display->texinfo->size)
 	{
@@ -42,7 +42,7 @@ void	init_textures(t_display *display)
 {
 	display->textures = ft_calloc(5 , sizeof * display->textures);
 	if (!display->textures)
-		free_exit(display, err_msg("malloc", STDERR_FILENO));
+		free_exit(display, err_msg("malloc", 1));
 	display->textures[NORTH] = xpm_to_img(display, display->texinfo->north);
 	display->textures[SOUTH] = xpm_to_img(display, display->texinfo->south);
 	display->textures[EAST] = xpm_to_img(display, display->texinfo->east);

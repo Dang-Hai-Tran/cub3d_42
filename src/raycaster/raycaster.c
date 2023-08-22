@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:20:34 by datran            #+#    #+#             */
-/*   Updated: 2023/08/19 15:37:47 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/22 17:12:20 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void calculate_line_height(t_ray *ray, t_display *display, t_player *play
 	ray->wall_x = floor(ray->wall_x);
 }
 
-int	perform_raycaster(t_display *display)
+void	perform_raycaster(t_display *display)
 {
 	t_ray		*ray;
 	t_player	*player;
@@ -109,6 +109,7 @@ int	perform_raycaster(t_display *display)
 		setup_dda_algo(ray, player);
 		perform_dda_algo(display, ray);
 		calculate_line_height(ray, display, player);
-		
+		update_texture_pixels(display, display->texinfo, display->ray, x);
+		x++;
 	}
 }

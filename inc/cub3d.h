@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 12:22:29 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/22 13:03:08 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,47 @@
 # include <stdbool.h>
 
 # include "../libraries/libft/inc/libft.h"
-# include "../libraries/gnl/inc/get_next_line.h"
 # include "../libraries/minilibx/mlx.h"
 
 # include "exit.h"
 # include "init.h"
 # include "move.h"
-# include "helpers.h"
-# include "map.h"
 # include "raycaster.h"
+# include "parsing.h"
 
-# define BONUS 0
+# ifndef O_DIRECTORY
+#  define O_DIRECTORY 00200000
+# endif
 
+# ifndef BONUS
+#  define BONUS 0
+# endif
+
+typedef enum e_dir t_dir;
+typedef enum e_code t_code;
 typedef struct s_img t_img;
 typedef struct s_texinfo t_texinfo;
 typedef struct s_mapinfo t_mapinfo;
 typedef struct s_ray t_ray;
 typedef struct s_player t_player;
 typedef struct s_display t_display;
-typedef enum e_dir t_dir;
+
+typedef enum e_dir
+{
+	NORTH = 0,
+	EAST = 1,
+	SOUTH = 2,
+	WEST = 3,
+	FLOOR = 4,
+	CEILING = 5,
+	UNDEFINED = 6,
+}	t_dir;
+
+typedef enum e_code
+{
+	SUCCESS = 0,
+	FAIL = 1,
+}	t_code;
 
 typedef struct s_img
 {
@@ -57,12 +79,10 @@ typedef struct s_texinfo
 	char				*south;
 	char				*west;
 	char				*east;
-	int					*floor;
-	int					*ceiling;
+	int					*rgb_floor;
+	int					*rgb_ceiling;
 	unsigned long		hex_floor;
 	unsigned long		hex_ceiling;
-	unsigned long		*ceiling_rgb;
-	unsigned long		*floor_rgb;
 	int					size;
 	int					index;
 	double				step;
@@ -73,13 +93,12 @@ typedef struct s_texinfo
 
 typedef struct s_mapinfo
 {
-	int		fd;
-	int		line_count;
 	char	*path;
+	int		fd;
+	int		nb_lines;
+	char	**lines;
 	int		height;
 	int		width;
-	int		rows;
-	int		cols;
 }	t_mapinfo;
 
 typedef struct s_player
@@ -132,14 +151,6 @@ typedef struct s_display
 	int				**textures;
 	int				**textures_pixels;
 }	t_display;
-
-typedef enum e_dir
-{
-	NORTH = 0,
-	EAST = 1,
-	SOUTH = 2,
-	WEST = 3,
-}	t_dir;
 
 
 #endif

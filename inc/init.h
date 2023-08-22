@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 12:44:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/20 11:30:01 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/22 17:02:15 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ typedef struct s_mapinfo t_mapinfo;
 typedef struct s_ray t_ray;
 typedef struct s_player t_player;
 typedef struct s_display t_display;
+typedef enum e_dir t_dir;
+typedef enum e_code t_code;
 
 void	init_display(t_display *display);
 void	init_img_zero(t_img *image);
-void	init_gamewindow(t_display *display);
 void	init_texture(t_display *display, t_img *image, char *path);
 void	init_img(t_display *display, t_img *image, int width, int height);
 void	init_player_dir(t_player *player);
 void	init_texinfo(t_texinfo *texinfo);
+void	init_mlx(t_display *display);
 void	init_textures(t_display *display);
 void	init_ray(t_ray * ray);
-void	init_struct(t_display *display, char *filename);
-void	init_map(t_display *display, char *filename);
 
 #endif

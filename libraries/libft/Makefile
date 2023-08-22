@@ -18,51 +18,40 @@ DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .d,$(basename $(SO
 CFLAGS    := -Wall -Werror -Wextra
 INC       := -Iinc -Isrc
 
-RESET=`tput sgr0`
+all: debug
+debug: CFLAGS += -g
+debug: $(TARGET)
+release: $(TARGET)
+release: CFLAGS += -O3
+
 GREEN=`tput setaf 2`
 RED=`tput setaf 1`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-
-define print_yellow
-	echo "$(YELLOW)$(1)$(RESET)"
-endef
+RESET=`tput sgr0`
 
 define print_green
-	echo "$(GREEN)$(1)$(RESET)"
+	@echo "$(GREEN)$(1)$(RESET)"
 endef
 
 define print_red
-	echo "$(RED)$(1)$(RESET)"
+	@echo "$(RED)$(1)$(RESET)"
 endef
 
 all: $(TARGET)
 
 clean:
-	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
+	$(call print_red,"Deleting the $(BUILDDIR) directory in $(PROJECT_NAME)...")
 	@rm -rf $(BUILDDIR) 
 
 fclean: clean
-	@printf "$(BLUE)Deleting the $(RESET)$(BINDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
+	$(call print_red,"Deleting the $(BINDIR) directory in $(PROJECT_NAME)...")
 	@rm -rf $(BINDIR)
 
 re: fclean all
 
-debug: CFLAGS += -g
-debug:
-	@printf "$(MAGENTA)Debug mode enabled\n$(RESET)";
-	@$(MAKE) all
-
-release: CFLAGS += -O3
-release: 
-	@printf "$(MAGENTA)Release mode enabled\n$(RESET)";
-	@$(MAKE) all
-
 $(TARGET): $(BINDIR) $(BUILDDIR) $(OBJECTS)
-	@$(call print_yellow,"Linking object files")
+	$(call print_green,"Linking object files...")
 	@$(AR) $(TARGET) $(OBJECTS)
-	@printf "$(RED)$(TARGET)$(RESET)$(GREEN) has been created!\n$(RESET)";
-	@echo "\n"
+	$(call print_green,"$(TARGET) has been created!")
 
 $(BUILDDIR) :
 	@mkdir -p $(BUILDDIR)
