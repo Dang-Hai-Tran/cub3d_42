@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 23:59:32 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 22:43:45 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 11:08:47 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ static bool	get_player_direction(char p_char, t_player *player)
 	return (true);
 }
 
-static int	check_map_chars(char **map, t_player *player)
+static int	check_map_chars(char **map, t_player *player, int height, int width)
 {
 	int		i;
 	int		j;
 	
 	i = 0;
-	while (map[i])
+	while (i < height)
 	{
 		j = 0;
-		while (map[i][j])
+		while (j < width)
 		{
 			if (!ft_strchr("10NSEW", map[i][j]) && !ft_isspace(map[i][j]))
 				return (err_msg("map character invalid", FAIL));
@@ -52,19 +52,8 @@ static int	check_map_chars(char **map, t_player *player)
 	return (SUCCESS);
 }
 
-static int	check_position_space_around(char **map, t_player *player)
-{
-	int		i;
-	int		j;
 
-	i = (int)player->pos_y;
-	j = (int)player->pos_x;
-	if (ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]) || ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1]))
-		return (err_msg("have space around player", FAIL));
-	return (SUCCESS);
-}
-
-static int	check_position_player(char **map, t_player *player)
+static int	check_position_player(char **map, t_player *player, int height, int width)
 {
 	int		i;
 	int		j;
@@ -87,18 +76,18 @@ static int	check_position_player(char **map, t_player *player)
 		}
 		i++;
 	}
-	if (check_position_space_around(map, player) == FAIL)
+	if (check_player_has_wall_around(map, player, height, width) == FAIL)
 		return (FAIL);
 	return (SUCCESS);
 }
 
 int	check_map(char **map, t_player *player, t_mapinfo *mapinfo)
 {
-	if (check_map_chars(map, player) == FAIL)
+	if (check_map_chars(map, player, mapinfo->height, mapinfo->width) == FAIL)
 		return (FAIL);
-	if (check_position_player(map, player) == FAIL)
+	if (check_position_player(map, player, mapinfo->height, mapinfo->width) == FAIL)
 		return (FAIL);
-	if (check_map_sides(mapinfo, map) == FAIL)
+	if (check_map_sides(map, mapinfo->height, mapinfo->width) == FAIL)
 		return (FAIL);
 	return (SUCCESS);
 }

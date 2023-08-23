@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 23:26:31 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 22:44:49 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 10:05:45 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**get_map_arr(char **lines, int nb_lines, t_mapinfo *mapinfo)
 	return (map);
 }
 
-char	**fill_map_space_by_wall(char **map, int height, int width)
+char	**fill_map_space_zero(char **map, int height, int width)
 {
 	int		i;
 	int		j;
@@ -54,7 +54,7 @@ char	**fill_map_space_by_wall(char **map, int height, int width)
 		while (j < width)
 		{
 			if ((j < (int)ft_strlen(map[i]) && ft_isspace(map[i][j])) || j >= (int)ft_strlen(map[i]))
-				new_map[i][j] = '1';
+				new_map[i][j] = '0';
 			else
 				new_map[i][j] = map[i][j];
 			j++;
@@ -71,9 +71,9 @@ int	get_map_game(char **lines, int nb_lines, t_mapinfo *mapinfo, t_display *disp
 	char	**map;
 
 	map = get_map_arr(lines, nb_lines, mapinfo);
+	map = fill_map_space_by_zero(map, mapinfo->height, mapinfo->width);
 	if (check_map(map, display->player, mapinfo) == FAIL)
 		return (FAIL);
-	map = fill_map_space_by_wall(map, mapinfo->height, mapinfo->width);
 	display->map = map;
 	return (SUCCESS);
 }

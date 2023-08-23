@@ -6,48 +6,93 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:13:50 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 22:59:38 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 11:07:37 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_top_or_bottom(char **map, int i, int j)
+static int	check_wall_top(char **map, int height, int width)
 {
-	if (!map || !map[i] || !map[i][j])
-		return (FAIL);
-	while (map[i][j])
+	int		i;
+	int		j;
+
+	j = 0;
+	while (j < width)
 	{
-		while (ft_isspace(map[i][j]))
-			j++;
-		if (map[i][j] != '1')
-			return (FAIL);
+		i = 0;
+		while (i < height && map[i][j] != '1')
+			i++;
+		if (i == height)
+			return (err_msg("top wall invalid", FAIL));
 		j++;
 	}
 	return (SUCCESS);
 }
 
-int	check_map_sides(t_mapinfo *mapinfo, char **map)
+static int	check_wall_bottom(char **map, int height, int width)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
-	if (check_top_or_bottom(map, 0, 0) == FAIL)
-		return (err_msg("top of map is invalid", FAIL));
-	i = 1;
-	while (i < (mapinfo->height - 1))
+	j = 0;
+	while (j < width)
+	{
+		i = height - 1;
+		while (i >= 0 && map[i][j] != '1')
+			i--;
+		if (i == -1)
+			return (err_msg("bottom wall invalid", FAIL));
+		j++;
+	}
+	return (SUCCESS);
+}
+
+static int	check_wall_left(char **map, int height, int width)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < height)
 	{
 		j = 0;
-		while (ft_isspace(map[i][j]))
+		while (j < width && map[i][j] != '1')
 			j++;
-		if (map[i][j] != '1')
-			return (err_msg("left of map is invalid", FAIL));
-		j = ft_strlen(map[i]) - 1;
-		if (map[i][j] != '1')
-			return (err_msg("right of map is invalid", FAIL));
+		if (j == width)
+			return ("left wall invalid", FAIL);
 		i++;
 	}
-	if (check_top_or_bottom(map, i, 0) == FAIL)
-		return (err_msg("bottom of map is invalid", FAIL));
+	return (SUCCESS);
+}
+
+static int	check_wall_right(char **map, int height, int width)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < height)
+	{
+		j = width;
+		while (j >= 0 && map[i][j] != '1')
+			j--;
+		if (j == -1)
+			return ("right wall invalid", FAIL);
+		i++;
+	}
+	return (SUCCESS);
+}
+
+int	check_map_sides(char **map, int height, int width)
+{
+	if (check_wall_top(map, height, width) == FAIL)
+		return (FAIL);
+	if (check_wall_bottom(map, height, width) == FAIL)
+		return (FAIL);
+	if (check_wall_left(map, height, width) == FAIL)
+		return (FAIL);
+	if (check_wall_right(map, height, width) == FAIL)
+		return (FAIL);
 	return (SUCCESS);
 }
