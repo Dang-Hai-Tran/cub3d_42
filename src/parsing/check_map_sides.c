@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:13:50 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 11:07:37 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 11:12:12 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	check_wall_left(char **map, int height, int width)
 		while (j < width && map[i][j] != '1')
 			j++;
 		if (j == width)
-			return ("left wall invalid", FAIL);
+			return (err_msg("left wall invalid", FAIL));
 		i++;
 	}
 	return (SUCCESS);
@@ -78,7 +78,7 @@ static int	check_wall_right(char **map, int height, int width)
 		while (j >= 0 && map[i][j] != '1')
 			j--;
 		if (j == -1)
-			return ("right wall invalid", FAIL);
+			return (err_msg("right wall invalid", FAIL));
 		i++;
 	}
 	return (SUCCESS);
