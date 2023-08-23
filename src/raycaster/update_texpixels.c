@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:38:51 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 09:45:29 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:26:51 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	update_texpixels(t_display *display, t_texinfo *texinfo, t_ray *ray, int x)
 
 	set_texinfo_index(display, ray);
 	texinfo->x = (int)(ray->wall_x * texinfo->size);
-	if ((ray->side == 0 && ray->dir_x > 0)
-		|| (ray->side == 1 && ray->dir_y < 0))
+	if ((ray->side == 0 && ray->dir_x < 0)
+		|| (ray->side == 1 && ray->dir_y > 0))
 		texinfo->x = texinfo->size - texinfo->x - 1;
 	texinfo->step = 1.0 * texinfo->size / ray->line_height;
 	texinfo->pos = (ray->draw_start - display->win_height / 2
@@ -68,9 +68,10 @@ void	update_texpixels(t_display *display, t_texinfo *texinfo, t_ray *ray, int x)
 		texinfo->y = (int)texinfo->pos & (texinfo->size - 1);
 		texinfo->pos += texinfo->step;
 		color = display->texbuffer[texinfo->index][texinfo->size * texinfo->y + texinfo->x];
-		if (ray->side == 1)
+		if (texinfo->index == NORTH || texinfo->index == EAST)
 			color = (color >> 1) & 8355711;
-		display->texpixels[y][x] = color;
+		if (color > 0)
+			display->texpixels[y][x] = color;
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:46:57 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 09:47:36 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 23:05:57 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	init_texbuffer(t_display *display)
 	display->texbuffer[SOUTH] = xpm_to_img(display, display->texinfo->south);
 	display->texbuffer[EAST] = xpm_to_img(display, display->texinfo->east);
 	display->texbuffer[WEST] = xpm_to_img(display, display->texinfo->west);
+	display->texbuffer[4] = NULL;
 }

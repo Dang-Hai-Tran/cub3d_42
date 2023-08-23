@@ -6,13 +6,13 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:56:52 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 10:24:55 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 16:35:16 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	player_rotate_left(t_display *display)
+static int	player_rotate_right(t_display *display)
 {
 	t_player	*p;
 	double		odir_x;
@@ -28,7 +28,7 @@ static int	player_rotate_left(t_display *display)
 	return (1);
 }
 
-static int	player_rotate_right(t_display *display)
+static int	player_rotate_left(t_display *display)
 {
 	t_player	*p;
 	double		odir_x;

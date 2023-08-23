@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_player_position.c                            :+:      :+:    :+:   */
+/*   check_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:11:29 by datran            #+#    #+#             */
-/*   Updated: 2023/08/15 09:32:25 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 22:55:24 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool check_pos_all(t_display *display, double pos_x, double pos_y)
 {
 	if (!BONUS && check_pos_in_map(display, pos_x, pos_y))
 		return (true);
-	if (BONUS && check_pos_in_map(display, pos_x, pos_y) && check_pos_wall_collision(display, pos_x, pos_y))
+	if (BONUS && check_pos_wall_collision(display, pos_x, pos_y))
 		return (true);
 	return (false);
 }

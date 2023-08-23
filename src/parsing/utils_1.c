@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:15:47 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 14:44:00 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 21:37:34 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ unsigned long rgb_to_hex(int *rgb_arr)
 	r = rgb_arr[0];
 	g = rgb_arr[1];
 	b = rgb_arr[2];
-	ret = ((r && 0xff) << 16) + ((g && 0xff) << 8) + (b && 0xff);
+	ret = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 	return (ret);
 }

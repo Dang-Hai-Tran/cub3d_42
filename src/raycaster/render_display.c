@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 09:42:18 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 09:21:09 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 22:53:10 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	render_frame(t_display *display)
 static void	render_raycaster(t_display *display)
 {
 	init_texpixels(display);
-	init_ray(display->ray);
 	perform_raycaster(display);
 	render_frame(display);
 }

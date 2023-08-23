@@ -1,13 +1,13 @@
-NO assets/textures/grey_stone.xpm
-SO assets/textures/purple_stone.xpm
-WE assets/textures/red_brick.xpm
-EA assets/textures/wood.xpm
+NO ./assets/textures/simonkraft/wet_sponge.xpm
+SO ./assets/textures/simonkraft/wet_sponge.xpm
+WE ./assets/textures/simonkraft/wet_sponge.xpm
+EA ./assets/textures/simonkraft/wet_sponge.xpm
 
-F 220,100,0
-C 225,30,0
+F 164,169,20
+C 153,204,255
 
-1111111111
-1110111111
-1100000001
-1110101011
-1111111S11
+11111
+1   1
+1 W 1
+1   1
+11111

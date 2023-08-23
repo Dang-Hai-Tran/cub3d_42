@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:20:34 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 09:21:22 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 22:55:56 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	init_raycaster(int x, t_ray *ray, t_player *player)
 {
 	init_ray(ray);
-	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
+	ray->camera_x = (double)(2 * x) / WIN_WIDTH - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->map_x = (int)player->pos_x;
@@ -40,7 +40,7 @@ static void	setup_dda_algo(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_x = 1;
-		ray->sidedist_x = (ray->map_x + 1 - player->pos_x) * ray->deltadist_x;
+		ray->sidedist_x = (ray->map_x + 1.0 - player->pos_x) * ray->deltadist_x;
 	}
 	if (ray->dir_y < 0)
 	{
@@ -50,7 +50,7 @@ static void	setup_dda_algo(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_y = 1;
-		ray->sidedist_x = (ray->map_y + 1 - player->pos_y) * ray->deltadist_y;
+		ray->sidedist_y = (ray->map_y + 1.0 - player->pos_y) * ray->deltadist_y;
 	}
 }
 
@@ -75,7 +75,7 @@ static void	perform_dda_algo(t_display *display, t_ray *ray)
 		}
 		if (ray->map_y < 0.25 || ray->map_x < 0.25 || ray->map_y > display->mapinfo->height - 0.25 || ray->map_x > display->mapinfo->width - 0.25)
 			break ;
-		if (display->map[ray->map_y][ray->map_x] == '1')
+		if (display->map[ray->map_y][ray->map_x] > '0')
 			hit = 1;
 	}
 }
@@ -86,8 +86,8 @@ static void calculate_line_height(t_ray *ray, t_display *display, t_player *play
 		ray->wall_dist = ray->sidedist_x - ray->deltadist_x;
 	else
 		ray->wall_dist = ray->sidedist_y - ray->deltadist_y;
-	ray->line_height = (int)display->win_height / ray->wall_dist;
-	ray->draw_start = -(ray->line_height / 2) + display->win_height / 2;
+	ray->line_height = (int)(display->win_height / ray->wall_dist);
+	ray->draw_start = -(ray->line_height) / 2 + display->win_height / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = ray->line_height / 2 + display->win_height / 2;
@@ -115,7 +115,7 @@ void	perform_raycaster(t_display *display)
 		setup_dda_algo(ray, player);
 		perform_dda_algo(display, ray);
 		calculate_line_height(ray, display, player);
-		update_texpixels(display, display->texinfo, display->ray, x);
+		update_texpixels(display, display->texinfo, ray, x);
 		x++;
 	}
 }
