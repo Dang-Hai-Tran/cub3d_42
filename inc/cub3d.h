@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 13:03:08 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 09:18:57 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include "exit.h"
 # include "init.h"
 # include "move.h"
-# include "raycaster.h"
 # include "parsing.h"
+# include "raycaster.h"
 
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY 00200000
@@ -148,8 +148,8 @@ typedef struct s_display
 	t_ray			*ray;
 	t_texinfo		*texinfo;
 	char			**map;
-	int				**textures;
-	int				**textures_pixels;
+	int				**texbuffer;
+	int				**texpixels;
 }	t_display;
 
 

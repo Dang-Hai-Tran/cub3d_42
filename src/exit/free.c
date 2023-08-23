@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:44:52 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 00:00:16 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 09:18:57 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static void free_ray(t_ray *ray)
 
 void	free_display(t_display *display)
 {
-	if (display->textures)
-		free_arr((void **)display->textures);
-	if (display->textures_pixels)
-		free_arr((void **)display->textures_pixels);
+	if (display->texbuffer)
+		free_arr((void **)display->texbuffer);
+	if (display->texpixels)
+		free_arr((void **)display->texpixels);
 	if (display->map)
 		free_arr((void **)display->map);
 	free_texinfo(display->texinfo);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_textures.c                                    :+:      :+:    :+:   */
+/*   init_texbuffer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:46:57 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 23:15:18 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 09:47:36 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	*xpm_to_img(t_display *display, char *path)
 	int		y;
 
 	init_texture(display, &image, path);
-	buf = ft_calloc(1, sizeof * buf * display->texinfo->size * display->texinfo->size);
+	buf = ft_calloc(display->texinfo->size * display->texinfo->size, sizeof(int));
 	if (!buf)
 		free_exit(display, err_msg("calloc buf xpm to img", 1));
 	y = 0;
@@ -38,13 +38,13 @@ static int	*xpm_to_img(t_display *display, char *path)
 	return (buf);
 }
 
-void	init_textures(t_display *display)
+void	init_texbuffer(t_display *display)
 {
-	display->textures = ft_calloc(5 , sizeof * display->textures);
-	if (!display->textures)
+	display->texbuffer = ft_calloc(5 , sizeof(int *));
+	if (!display->texbuffer)
 		free_exit(display, err_msg("malloc", 1));
-	display->textures[NORTH] = xpm_to_img(display, display->texinfo->north);
-	display->textures[SOUTH] = xpm_to_img(display, display->texinfo->south);
-	display->textures[EAST] = xpm_to_img(display, display->texinfo->east);
-	display->textures[WEST] = xpm_to_img(display, display->texinfo->west);
+	display->texbuffer[NORTH] = xpm_to_img(display, display->texinfo->north);
+	display->texbuffer[SOUTH] = xpm_to_img(display, display->texinfo->south);
+	display->texbuffer[EAST] = xpm_to_img(display, display->texinfo->east);
+	display->texbuffer[WEST] = xpm_to_img(display, display->texinfo->west);
 }

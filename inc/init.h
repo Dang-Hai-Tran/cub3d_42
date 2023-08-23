@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 12:44:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 17:02:15 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 09:19:39 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_img(t_display *display, t_img *image, int width, int height);
 void	init_player_dir(t_player *player);
 void	init_texinfo(t_texinfo *texinfo);
 void	init_mlx(t_display *display);
-void	init_textures(t_display *display);
+void	init_texbuffer(t_display *display);
 void	init_ray(t_ray * ray);
 
 #endif

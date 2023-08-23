@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:20:34 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 17:12:20 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 09:21:22 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ static void	init_raycaster(int x, t_ray *ray, t_player *player)
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
-	ray->deltadist_x = fabs(1 / ray->dir_x);
-	ray->deltadist_y = fabs(1 / ray->dir_y);
+	if (ray->dir_x != 0)
+		ray->deltadist_x = fabs(1 / ray->dir_x);
+	else
+		ray->deltadist_x = (double)1e30;
+	if (ray->dir_y != 0)
+		ray->deltadist_y = fabs(1 / ray->dir_y);
+	else
+		ray->deltadist_y = (double)1e30;
 }
 
 static void	setup_dda_algo(t_ray *ray, t_player *player)
@@ -67,9 +73,9 @@ static void	perform_dda_algo(t_display *display, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_y < 0.25 || ray->map_x < 0.25 || ray->map_y > display->mapinfo->width - 0.25 || ray->map_x > display->mapinfo->height - 0.25)
+		if (ray->map_y < 0.25 || ray->map_x < 0.25 || ray->map_y > display->mapinfo->height - 0.25 || ray->map_x > display->mapinfo->width - 0.25)
 			break ;
-		else if (display->map[ray->map_y][ray->map_x] == '1')
+		if (display->map[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
 }
@@ -91,7 +97,7 @@ static void calculate_line_height(t_ray *ray, t_display *display, t_player *play
 		ray->wall_x = player->pos_y + ray->wall_dist * ray->dir_y;
 	else
 		ray->wall_x = player->pos_x + ray->wall_dist * ray->dir_x;
-	ray->wall_x = floor(ray->wall_x);
+	ray->wall_x -= floor(ray->wall_x);
 }
 
 void	perform_raycaster(t_display *display)
@@ -109,7 +115,7 @@ void	perform_raycaster(t_display *display)
 		setup_dda_algo(ray, player);
 		perform_dda_algo(display, ray);
 		calculate_line_height(ray, display, player);
-		update_texture_pixels(display, display->texinfo, display->ray, x);
+		update_texpixels(display, display->texinfo, display->ray, x);
 		x++;
 	}
 }

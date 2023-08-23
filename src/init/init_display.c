@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:23:02 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 23:58:40 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 09:18:57 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	init_display(t_display *display)
 		free_exit(display, err_msg("calloc ray", 1));
 	init_ray(display->ray);
 	display->map = NULL;
-	display->textures_pixels = NULL;
-	display->textures = NULL;
+	display->texpixels = NULL;
+	display->texbuffer = NULL;
 }
 
 void	init_img_zero(t_img *image)

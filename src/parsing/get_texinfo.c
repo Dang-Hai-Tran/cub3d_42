@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:53:39 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 23:03:56 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 10:02:05 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int	get_texinfo(char **lines, t_texinfo *texinfo)
 	texinfo->west = get_texinfo_path(lines, WEST);
 	if (!texinfo->north || !texinfo->south || !texinfo->east || !texinfo->west)
 		return (err_msg("texture path invalid", 1));
+	if (!arg_is_valid_ext(texinfo->north, ".xpm") || !arg_is_valid_ext(texinfo->south, ".xpm") || !arg_is_valid_ext(texinfo->east, ".xpm") || !arg_is_valid_ext(texinfo->west, ".xpm"))
+		return (FAIL);
 	texinfo->rgb_floor = get_rgb_arr(get_rgb_char(lines, FLOOR));
 	texinfo->rgb_ceiling = get_rgb_arr(get_rgb_char(lines, CEILING));
 	if (!check_rgb_value(texinfo->rgb_floor) || !check_rgb_value(texinfo->rgb_ceiling))
