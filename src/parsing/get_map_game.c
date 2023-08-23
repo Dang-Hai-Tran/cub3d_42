@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 23:26:31 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 10:05:45 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 15:29:04 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**get_map_arr(char **lines, int nb_lines, t_mapinfo *mapinfo)
 	return (map);
 }
 
-char	**fill_map_space_zero(char **map, int height, int width)
+char	**fill_map_space_by_zero(char **map, int height, int width)
 {
 	int		i;
 	int		j;

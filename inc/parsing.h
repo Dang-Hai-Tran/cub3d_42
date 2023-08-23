@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:29:46 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 11:08:09 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 15:31:36 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		check_map(char **map, t_player *player, t_mapinfo *mapinfo);
 int		get_map_game(char **lines, int nb_lines, t_mapinfo *mapinfo, t_display *display);
 int		parsing_args(int argc, char **argv, t_display *display);
 int		check_args(int argc, char **argv, t_mapinfo *mapinfo);
-bool 	arg_is_valid_ext(char **argv, char *ext);
+bool	arg_is_valid_ext(char *path, char *ext);
 int		get_mapinfo(int fd, t_mapinfo *mapinfo);
 void	remove_backslash_end(char *str);
 int		check_map_sides(char **map, int height, int width);

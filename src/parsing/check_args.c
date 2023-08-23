@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 08:57:22 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 09:57:02 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/23 15:30:57 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static bool	arg_is_dir(char **argv)
 	return (false);
 }
 
-bool arg_is_valid_ext(char **argv, char *ext)
+bool arg_is_valid_ext(char *path, char *ext)
 {
 	char	*tmp;
 
-	tmp = ft_strstr(argv[1], ext);
+	tmp = ft_strstr(path, ext);
 	if (tmp && ft_strlen(tmp) == ft_strlen(ext))
 		return (true);
 	err_msg("File extension invalid", 1);
@@ -52,7 +52,7 @@ int	check_args(int argc, char **argv, t_mapinfo *mapinfo)
 {
 	int		fd;
 
-	if (!valid_number_args(argc) || arg_is_dir(argv) || !arg_is_valid_ext(argv, ".cub"))
+	if (!valid_number_args(argc) || arg_is_dir(argv) || !arg_is_valid_ext(argv[1], ".cub"))
 		return (FAIL);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
