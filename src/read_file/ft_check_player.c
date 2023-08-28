@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_check_player.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/08/28 16:51:47 by datran           ###   ########.fr       */
+/*   Created: 2023/08/26 13:40:20 by xuluu             #+#    #+#             */
+/*   Updated: 2023/08/28 16:47:36 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+bool	ft_check_nombre_player(t_pplayer *player, char *str)
 {
-	// t_display	display;
-	t_data		data;
+	int	i;
 
-	if (parsing_args(argc, argv, &data) == FAIL)
-		return (FAIL);
-	// init_display(&display);
-	// init_mlx(&display);
-	// init_texbuffer(&display);
-	// render_images(&display);
-	// input_listen(&display);
-	// mlx_loop_hook(display.mlx, render_display, &display);
-	// mlx_loop(display.mlx);
-	return (SUCCESS);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+	{
+		if (str[i] == 'N'
+			|| str[i] == 'S'
+			|| str[i] == 'W'
+			|| str[i] == 'E')
+		{
+			if (player->find_player == false)
+				player->find_player = true;
+			else
+				return (1);
+		}
+		i++;
+	}
+	return (0);
 }

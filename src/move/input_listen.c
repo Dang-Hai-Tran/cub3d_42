@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:24:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 14:10:21 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:32:43 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static int	key_press_handler(int key, t_display *display)
 {
 	if (key == XK_Escape)
+	{
+		ft_putendl_fd("Exit cub3d by ESC", STDOUT_FILENO);
 		free_exit(display, 0);
+	}
 	if (key == XK_Left)
 		display->player->rotate = -1;
 	if (key == XK_Right)

@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   ft_check_nombre_line_in_file.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 23:50:09 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 10:44:47 by datran           ###   ########.fr       */
+/*   Created: 2023/08/24 15:10:13 by xuluu             #+#    #+#             */
+/*   Updated: 2023/08/28 16:31:09 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	str_contain_only_digits(char *str)
+bool	ft_check_nombre_line_in_file(char *file)
 {
-	if (!str || !*str)
-		return (false);
-	while (*str)
+	int		fd;
+	int		nbr_line;
+	char	*line;
+
+	fd = open(file, O_RDONLY);
+	nbr_line = 0;
+	while (42)
 	{
-		if (!ft_isdigit(*str))
-			return (false);
-		str++;
+		line = ft_gnl(fd);
+		if (!line)
+			break ;
+		free(line);
+		nbr_line++;
 	}
-	return (true);
-}
-
-void	remove_backslash_end(char *str)
-{
-	int		len;
-
-	len = ft_strlen(str);
-	if (str[len - 1] == '\n')
-		str[len - 1] = 0;
+	if (nbr_line < 9)
+	{
+		printf("Error < file has 9 lines minimum > !\n");
+		return (1);
+	}
+	return (0);
 }
