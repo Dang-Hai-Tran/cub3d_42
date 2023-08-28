@@ -1,4 +1,4 @@
-PROJECT_NAME := Cub3d
+PROJECT_NAME := cub3d
 BIN_NAME  := cub3d
 CC        := cc
 ROOTDIR   := .
@@ -16,7 +16,7 @@ LIBS      := $(shell find $(LIBDIR) -type f -name '*.a')
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)%,$(addsuffix .d,$(basename $(SOURCES))))
 BONUS     := 0
-CFLAGS    := -Wall -Wextra -Werror -g3 -DBONUS=$(BONUS)
+CFLAGS    := -Wall -Wextra -Werror -g -DBONUS=$(BONUS)
 INC       := -Iinc -Isrc
 
 LIB_DIRS  := $(shell find $(LIBSRCDIR) -type d -exec test -e '{}/Makefile' ';' -print)
@@ -40,26 +40,21 @@ define print_red
 	echo "$(RED)$(1)$(RESET)"
 endef
 
-debug: CFLAGS += -g
-release: CFLAGS += -O3
-
-all: libs $(BINDIR) $(BUILDDIR) $(OBJECTS)
+all: $(LIBDIR) $(BINDIR) $(BUILDDIR) $(OBJECTS)
 	@$(call print_green,"Linking object files")
 	@$(CC) -o $(TARGET) $(OBJECTS) $(LIB)
 	@printf "$(RED)$(TARGET)$(RESET)$(GREEN) has been created!\n$(RESET)";
 
-libs: $(LIBDIR) lib/$(PROJECT_NAME).flag
-
-lib/$(PROJECT_NAME).flag: $(LIBS)
+$(LIBDIR):
+	@mkdir -p $(LIBDIR)
 	@for dir in $(LIB_DIRS); do \
 		printf "$(BLUE)Making $(RESET)$(RED)$$dir\n$(RESET)"; \
-		make -C $$dir && ( mv $$dir/bin/*.a $(LIBDIR)/ || mv $$dir/*.a $(LIBDIR)/ ); \
+		make -C $$dir && mv $$dir/*.a $(LIBDIR)/; \
 	done
-	@find $(LIBSRCDIR) -type d -empty -name 'bin' -delete
-	@touch $@
 
 bonus:
 	make all BONUS=1
+
 clean:
 	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(BUILDDIR) 
@@ -69,31 +64,11 @@ clean:
 
 fclean: clean
 	@printf "$(BLUE)Deleting the $(RESET)$(BINDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
-	@rm -rf $(BINDIR)
-	@for dir in $(LIB_DIRS); do \
-		rm -rf $$dir/bin; \
-	done
+	@rm -rf $(BINDIR);
+	@printf "$(BLUE)Deleting the $(RESET)$(LIBDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
+	@rm -rf $(LIBDIR)
 
 re: fclean all
-
-prod: fclean
-	@printf "$(BLUE)Deleting the $(RESET)$(LIBDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
-	@rm -rf $(LIBDIR)
-
-fre: fclean libs
-	@printf "$(BLUE)Deleting the $(RESET)$(LIBDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
-	@rm -rf $(LIBDIR)
-	@$(MAKE) libs
-	@$(MAKE) all
-
-debug: fre
-
-release: 
-	@printf "$(MAGENTA)Release mode enabled\n$(RESET)";
-	@$(MAKE) all
-
-$(LIBDIR) :
-	@mkdir -p $(LIBDIR)
 
 $(BUILDDIR) :
 	@mkdir -p $(BUILDDIR)
@@ -104,12 +79,8 @@ $(BINDIR):
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
-	@$(CC) $(CFLAGS) $(INC) -M $< -MT $@ > $(@:.o=.td)
-	@cp $(@:.o=.td) $(@:.o=.d); 
-	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-	-e '/^$$/ d' -e 's/$$/ :/' < $(@:.o=.td) >> $(@:.o=.d); 
-	@rm -f $(@:.o=.td)
+	@$(CC) $(CFLAGS) $(INC) -M $< -MT $@ > $(@:.o=.d)
 
 -include $(DEPS)
 
-.PHONY: clean fclean all libs remove-empty-bin-dirs
+.PHONY: all clean fclean re
