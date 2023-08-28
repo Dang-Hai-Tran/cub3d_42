@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:39:55 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 17:07:16 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:48:09 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ bool	ft_check_file(char *file, char *type)
 		printf("Error < %s not type (%s) > !\n", file, type);
 		return (1);
 	}
-	printf("end = [%s]\n", &file[i]);
 	if (ft_check_open_file(file) == 1)
 		return (1);
 	return (0);

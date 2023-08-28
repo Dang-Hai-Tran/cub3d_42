@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:44:52 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 14:02:12 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:45:46 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 static void	free_mapinfo(t_mapinfo *mapinfo)
 {
-	if (mapinfo->fd > 0)
-		close(mapinfo->fd);
-	if (mapinfo->path)
-		free(mapinfo->path);
-	if (mapinfo->lines)
-		free_arr((void **)mapinfo->lines);
 	if (mapinfo)
 		free(mapinfo);
 }

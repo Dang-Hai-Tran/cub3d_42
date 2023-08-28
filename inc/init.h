@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 12:44:00 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 16:44:52 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:43:37 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ typedef struct s_mapinfo	t_mapinfo;
 typedef struct s_ray		t_ray;
 typedef struct s_player		t_player;
 typedef struct s_display	t_display;
+typedef struct s_data		t_data;
 
-void	init_display(t_display *display);
+unsigned long	convert_rgb_to_hex(int *rgb);
+void	init_display(t_display *display, t_data *data);
 void	init_img_zero(t_img *image);
 void	init_texture(t_display *display, t_img *image, char *path);
 void	init_img(t_display *display, t_img *image, int width, int height);
 void	init_player_dir(t_player *player);
-void	init_texinfo(t_texinfo *texinfo);
 void	init_mlx(t_display *display);
 void	init_texbuffer(t_display *display);
 void	init_ray(t_ray *ray);

@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:53:19 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:58:40 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:47:23 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	parsing_args(int argc, char **argv, t_data *data)
 {
-	printf("%s\n", "go to parsing args");
 	if (argc != 2)
 		return (err_msg("Number arguments is invalid", FAIL));
 	if (ft_check_file(argv[1], ".cub") == 1)

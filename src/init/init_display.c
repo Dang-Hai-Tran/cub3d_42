@@ -6,43 +6,46 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:23:02 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 14:07:19 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:44:44 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_mapinfo(t_mapinfo *mapinfo)
+static void	init_mapinfo(t_mapinfo *mapinfo, t_data *data)
 {
-	mapinfo->fd = 0;
-	mapinfo->nb_lines = 0;
-	mapinfo->path = NULL;
-	mapinfo->height = 0;
-	mapinfo->width = 0;
-	mapinfo->lines = NULL;
+	mapinfo->height = data->m_map.height;
+	mapinfo->width = data->m_map.width;
 }
 
-static void	init_player_zero(t_player *player)
+static void	init_player_zero(t_player *player, t_data *data)
 {
-	player->dir = UNDEFINED;
-	player->pos_x = 0.0;
-	player->pos_y = 0.0;
+	if (data->m_player.p_char == 'N')
+		player->dir = NORTH;
+	if (data->m_player.p_char == 'S')
+		player->dir = SOUTH;
+	if (data->m_player.p_char =='E')
+		player->dir = EAST;
+	if (data->m_player.p_char == 'W')
+		player->dir = WEST;
+	player->pos_x = (double)data->m_player.p_col + 0.5;
+	player->pos_y = (double)data->m_player.p_row + 0.5;
 	player->has_moved = 0;
 	player->move_x = 0;
 	player->move_x = 0;
 	player->rotate = 0;
 }
 
-void	init_texinfo(t_texinfo *texinfo)
+static void	init_texinfo(t_texinfo *texinfo, t_data *data)
 {
-	texinfo->north = NULL;
-	texinfo->south = NULL;
-	texinfo->east = NULL;
-	texinfo->west = NULL;
-	texinfo->rgb_floor = NULL;
-	texinfo->rgb_ceiling = NULL;
-	texinfo->hex_ceiling = 0;
-	texinfo->hex_floor = 0;
+	texinfo->north = data->no_path;
+	texinfo->south = data->so_path;
+	texinfo->east = data->ea_path;
+	texinfo->west = data->we_path;
+	texinfo->rgb_floor = data->rgb_floor;
+	texinfo->rgb_ceiling = data->rgb_ceiling;
+	texinfo->hex_floor = convert_rgb_to_hex(texinfo->rgb_floor);
+	texinfo->hex_ceiling = convert_rgb_to_hex(texinfo->rgb_ceiling);
 	texinfo->size = TEX_SIZE;
 	texinfo->step = 0;
 	texinfo->pos = 0.0;
@@ -50,7 +53,7 @@ void	init_texinfo(t_texinfo *texinfo)
 	texinfo->y = 0;
 }
 
-void	init_display(t_display *display)
+void	init_display(t_display *display, t_data *data)
 {
 	display->mlx = NULL;
 	display->win = NULL;
@@ -59,15 +62,15 @@ void	init_display(t_display *display)
 	display->player = ft_calloc(1, sizeof(t_player));
 	if (!display->player)
 		free_exit(display, err_msg("calloc player", 1));
-	init_player_zero(display->player);
+	init_player_zero(display->player, data);
 	display->mapinfo = ft_calloc(1, sizeof(t_mapinfo));
 	if (!display->mapinfo)
 		free_exit(display, err_msg("calloc mapinfo", 1));
-	init_mapinfo(display->mapinfo);
+	init_mapinfo(display->mapinfo, data);
 	display->texinfo = ft_calloc(1, sizeof(t_texinfo));
 	if (!display->texinfo)
 		free_exit(display, err_msg("calloc texinfo", 1));
-	init_texinfo(display->texinfo);
+	init_texinfo(display->texinfo, data);
 	display->ray = ft_calloc(1, sizeof(t_ray));
 	if (!display->ray)
 		free_exit(display, err_msg("calloc ray", 1));

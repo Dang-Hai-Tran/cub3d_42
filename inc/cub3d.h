@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 16:44:52 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:42:38 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_mapinfo	t_mapinfo;
 typedef struct s_ray		t_ray;
 typedef struct s_player		t_player;
 typedef struct s_display	t_display;
+typedef struct s_data		t_data;
 
 typedef enum e_dir
 {
@@ -93,10 +94,6 @@ typedef struct s_texinfo
 
 typedef struct s_mapinfo
 {
-	char	*path;
-	int		fd;
-	int		nb_lines;
-	char	**lines;
 	int		height;
 	int		width;
 }	t_mapinfo;
