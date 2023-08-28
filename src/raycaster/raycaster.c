@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:20:34 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 22:55:56 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:13:32 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,17 @@ static void	perform_dda_algo(t_display *display, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_y < 0.25 || ray->map_x < 0.25 || ray->map_y > display->mapinfo->height - 0.25 || ray->map_x > display->mapinfo->width - 0.25)
+		if (ray->map_y < 0.25 || ray->map_x < 0.25 || ray->map_y \
+		> display->mapinfo->height - 0.25 || ray->map_x \
+		> display->mapinfo->width - 0.25)
 			break ;
 		if (display->map[ray->map_y][ray->map_x] > '0')
 			hit = 1;
 	}
 }
 
-static void calculate_line_height(t_ray *ray, t_display *display, t_player *player)
+static void	calculate_line_height(t_ray *ray, t_display *display, \
+t_player *player)
 {
 	if (ray->side == 0)
 		ray->wall_dist = ray->sidedist_x - ray->deltadist_x;

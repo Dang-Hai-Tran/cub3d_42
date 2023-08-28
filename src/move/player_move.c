@@ -6,27 +6,27 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 17:08:33 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 16:26:49 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:10:59 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int player_move_forward(t_display *display)
+static int	player_move_forward(t_display *display)
 {
 	double		npos_x;
 	double		npos_y;
-	
+
 	npos_x = display->player->pos_x + display->player->dir_x * MOVE_SPEED;
 	npos_y = display->player->pos_y + display->player->dir_y * MOVE_SPEED;
 	return (check_move(display, npos_x, npos_y));
 }
 
-static int player_move_backward(t_display *display)
+static int	player_move_backward(t_display *display)
 {
 	double		npos_x;
 	double		npos_y;
-	
+
 	npos_x = display->player->pos_x - display->player->dir_x * MOVE_SPEED;
 	npos_y = display->player->pos_y - display->player->dir_y * MOVE_SPEED;
 	return (check_move(display, npos_x, npos_y));
@@ -55,7 +55,7 @@ static int	player_move_left(t_display *display)
 int	player_move(t_display *display)
 {
 	int		moved;
-	
+
 	moved = 0;
 	if (display->player->move_x == 1)
 		moved += player_move_right(display);

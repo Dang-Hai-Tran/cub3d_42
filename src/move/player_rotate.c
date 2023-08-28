@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:56:52 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 16:35:16 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:09:42 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	player_rotate_right(t_display *display)
 	p->dir_x = p->dir_x * cos(ROTATE_SPEED) - p->dir_y * sin(ROTATE_SPEED);
 	p->dir_y = odir_x * sin(ROTATE_SPEED) + p->dir_y * cos(ROTATE_SPEED);
 	oplane_x = p->plane_x;
-	p->plane_x = p->plane_x * cos(ROTATE_SPEED) - p->plane_y * sin(ROTATE_SPEED);
+	p->plane_x = p->plane_x * cos(ROTATE_SPEED) - p->plane_y \
+	* sin(ROTATE_SPEED);
 	p->plane_y = oplane_x * sin(ROTATE_SPEED) + p->plane_y * cos(ROTATE_SPEED);
 	return (1);
 }
@@ -39,8 +40,10 @@ static int	player_rotate_left(t_display *display)
 	p->dir_x = p->dir_x * cos(-ROTATE_SPEED) - p->dir_y * sin(-ROTATE_SPEED);
 	p->dir_y = odir_x * sin(-ROTATE_SPEED) + p->dir_y * cos(-ROTATE_SPEED);
 	oplane_x = p->plane_x;
-	p->plane_x = p->plane_x * cos(-ROTATE_SPEED) - p->plane_y * sin(-ROTATE_SPEED);
-	p->plane_y = oplane_x * sin(-ROTATE_SPEED) + p->plane_y * cos(-ROTATE_SPEED);
+	p->plane_x = p->plane_x * cos(-ROTATE_SPEED) - p->plane_y \
+	* sin(-ROTATE_SPEED);
+	p->plane_y = oplane_x * sin(-ROTATE_SPEED) + p->plane_y \
+	* cos(-ROTATE_SPEED);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 09:18:57 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 13:53:22 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@
 #  define BONUS 0
 # endif
 
-typedef enum e_dir t_dir;
-typedef enum e_code t_code;
-typedef struct s_img t_img;
-typedef struct s_texinfo t_texinfo;
-typedef struct s_mapinfo t_mapinfo;
-typedef struct s_ray t_ray;
-typedef struct s_player t_player;
-typedef struct s_display t_display;
+typedef enum e_dir			t_dir;
+typedef enum e_code			t_code;
+typedef struct s_img		t_img;
+typedef struct s_texinfo	t_texinfo;
+typedef struct s_mapinfo	t_mapinfo;
+typedef struct s_ray		t_ray;
+typedef struct s_player		t_player;
+typedef struct s_display	t_display;
 
 typedef enum e_dir
 {
@@ -151,6 +151,5 @@ typedef struct s_display
 	int				**texbuffer;
 	int				**texpixels;
 }	t_display;
-
 
 #endif

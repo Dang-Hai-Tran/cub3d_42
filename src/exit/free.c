@@ -6,30 +6,13 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:44:52 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 09:18:57 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:02:12 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_arr(void **arr)
-{
-	size_t		i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	if (arr)
-	{
-		free(arr);
-		arr = NULL;
-	}
-}
-
-static void free_mapinfo(t_mapinfo *mapinfo)
+static void	free_mapinfo(t_mapinfo *mapinfo)
 {
 	if (mapinfo->fd > 0)
 		close(mapinfo->fd);
@@ -41,7 +24,7 @@ static void free_mapinfo(t_mapinfo *mapinfo)
 		free(mapinfo);
 }
 
-static void free_texinfo(t_texinfo *texinfo)
+static void	free_texinfo(t_texinfo *texinfo)
 {
 	if (texinfo->north)
 		free(texinfo->north);
@@ -59,13 +42,13 @@ static void free_texinfo(t_texinfo *texinfo)
 		free(texinfo);
 }
 
-static void free_player(t_player *player)
+static void	free_player(t_player *player)
 {
 	if (player)
 		free(player);
 }
 
-static void free_ray(t_ray *ray)
+static void	free_ray(t_ray *ray)
 {
 	if (ray)
 		free(ray);

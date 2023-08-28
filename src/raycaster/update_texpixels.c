@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:38:51 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 17:26:51 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:14:50 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static void	set_texinfo_index(t_display *display, t_ray *ray)
 	}
 }
 
-void	update_texpixels(t_display *display, t_texinfo *texinfo, t_ray *ray, int x)
+void	update_texpixels(t_display *display, t_texinfo *texinfo, \
+t_ray *ray, int x)
 {
 	int			y;
 	int			color;
@@ -67,7 +68,8 @@ void	update_texpixels(t_display *display, t_texinfo *texinfo, t_ray *ray, int x)
 	{
 		texinfo->y = (int)texinfo->pos & (texinfo->size - 1);
 		texinfo->pos += texinfo->step;
-		color = display->texbuffer[texinfo->index][texinfo->size * texinfo->y + texinfo->x];
+		color = display->texbuffer[texinfo->index][texinfo->size * \
+		texinfo->y + texinfo->x];
 		if (texinfo->index == NORTH || texinfo->index == EAST)
 			color = (color >> 1) & 8355711;
 		if (color > 0)

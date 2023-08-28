@@ -6,13 +6,14 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 09:42:18 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 22:53:10 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:13:50 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	set_frame_image_pixel(t_display *display, t_img *image, int x, int y)
+static void	set_frame_image_pixel(t_display *display, t_img *image, int x, \
+int y)
 {
 	if (display->texpixels[y][x] > 0)
 		set_image_pixel(image, x, y, display->texpixels[y][x]);

@@ -6,13 +6,13 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:23:02 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 22:33:00 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:07:19 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void init_mapinfo(t_mapinfo *mapinfo)
+static void	init_mapinfo(t_mapinfo *mapinfo)
 {
 	mapinfo->fd = 0;
 	mapinfo->nb_lines = 0;
@@ -22,7 +22,7 @@ static void init_mapinfo(t_mapinfo *mapinfo)
 	mapinfo->lines = NULL;
 }
 
-static void init_player_zero(t_player *player)
+static void	init_player_zero(t_player *player)
 {
 	player->dir = UNDEFINED;
 	player->pos_x = 0.0;

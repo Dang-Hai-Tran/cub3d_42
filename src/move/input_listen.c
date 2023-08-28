@@ -6,13 +6,13 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:24:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/22 11:21:14 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:10:21 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int key_press_handler(int key, t_display *display)
+static int	key_press_handler(int key, t_display *display)
 {
 	if (key == XK_Escape)
 		free_exit(display, 0);
@@ -31,7 +31,7 @@ static int key_press_handler(int key, t_display *display)
 	return (0);
 }
 
-static int key_release_handler(int key, t_display *display)
+static int	key_release_handler(int key, t_display *display)
 {
 	if (key == XK_Escape)
 		free_exit(display, 0);
@@ -75,7 +75,8 @@ void	input_listen(t_display *display)
 {
 	mlx_hook(display->win, ClientMessage, NoEventMask, quit_cub3d, display);
 	mlx_hook(display->win, KeyPress, KeyPressMask, key_press_handler, display);
-	mlx_hook(display->win, KeyRelease, KeyReleaseMask, key_release_handler, display);
+	mlx_hook(display->win, KeyRelease, KeyReleaseMask, \
+	key_release_handler, display);
 	if (BONUS)
 		mlx_hook(display->win, MotionNotify, PointerMotionMask,
 			mouse_motion_handler, display);
