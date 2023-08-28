@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:23:02 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 18:44:44 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:53:07 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	init_display(t_display *display, t_data *data)
 	display->ray = ft_calloc(1, sizeof(t_ray));
 	if (!display->ray)
 		free_exit(display, err_msg("calloc ray", 1));
-	display->map = NULL;
+	display->map = data->map;
 	display->texpixels = NULL;
 	display->texbuffer = NULL;
 }
