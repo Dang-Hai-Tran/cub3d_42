@@ -28,10 +28,18 @@ bool	ft_check_open_file(t_data *data, char *file)
 
 	fd = open(file, O_DIRECTORY);
 	if (fd != -1)
-		return (ft_error(data, "map file is directory", 0));
+	{
+		printf("Error: '%s' isn't a file !\n", file);
+		data->error = 1;
+		return (1);
+	}
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (ft_error(data, "can't open map file", 0));
+	{
+		printf("Error: can't open '%s' !\n", file);
+		data->error = 1;
+		return (1);
+	}
 	return (0);
 }
 
