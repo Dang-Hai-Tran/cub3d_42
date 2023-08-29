@@ -12,7 +12,7 @@ void	ft_print_map(t_map *map, char **tab)
 		n = 0;
 		while (n < map->width)
 		{
-			printf("%c", tab[m][n]);
+			printf("[ %c ]", tab[m][n]);
 			n++;
 		}
 		printf("\n");

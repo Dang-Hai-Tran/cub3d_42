@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-bool	ft_check_character_map(char *str)
+bool	ft_check_character_map(t_data *data, char *str, int id_line)
 {
 	int	i;
 
@@ -26,14 +26,14 @@ bool	ft_check_character_map(char *str)
 			&& str[i] != 'E'
 			&& str[i] != 'W'
 			&& str[i] != ' ')
-			return (1);
+			return (ft_error(data, "Invalid character in map", id_line));
 		i++;
 	}
 	if (i == 0)
 		return (1);
 	if (ft_check_line_space(str) == 0
 		&& str[i - 1] != '1')
-		return (1);
+		return (ft_error(data, "Invalid map", id_line));
 	return (0);
 }
 
@@ -77,23 +77,23 @@ void	ft_get_size_map(t_map *map, char *line)
 	map->height = map->line_end - map->line_start + 1;
 }
 
-bool	ft_check_map(t_map *map, char *line, int id_line)
+bool	ft_check_map(t_data *data, char *line, int id_line)
 {
-	if (ft_check_character_map(line) == 1)
+	if (ft_check_character_map(data, line, id_line) == 1)
 		return (1);
 	if (ft_check_line_space(line) == 0)
 	{
 		if (ft_check_line_without_1(line) == 1)
-			return (1);
-		if (map->find_map == false)
+			return (ft_error(data, "Invalid map", id_line));
+		if (data->m_map.find_map == false)
 		{
-			map->find_map = true;
-			map->line_start = id_line;
+			data->m_map.find_map = true;
+			data->m_map.line_start = id_line;
 		}
-		map->line_end = id_line;
-		ft_get_size_map(map, line);
+		data->m_map.line_end = id_line;
+		ft_get_size_map(&(data->m_map), line);
 	}
-	if (map->find_map == false)
+	if (data->m_map.find_map == false)
 		return (1);
 	return (0);
 }

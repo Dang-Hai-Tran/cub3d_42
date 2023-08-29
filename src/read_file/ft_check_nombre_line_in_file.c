@@ -29,9 +29,6 @@ bool	ft_check_nombre_line_in_file(char *file)
 		nbr_line++;
 	}
 	if (nbr_line < 9)
-	{
-		printf("Error < file has 9 lines minimum > !\n");
-		return (1);
-	}
+		return (ft_error("file has 9 lines minimum", 0));
 	return (0);
 }

@@ -58,6 +58,7 @@ void	ft_read_file3(t_data *data, char *file)
 
 void	ft_get_data(t_data *data, char *file)
 {
+	printf("--> OK get data\n");
 	ft_read_file3(data, file);
 	ft_get_map(data, file);
 	return ;

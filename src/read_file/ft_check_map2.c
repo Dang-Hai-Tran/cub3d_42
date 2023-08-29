@@ -12,10 +12,10 @@
 
 #include "cub3d.h"
 
-bool	ft_check_size_map(t_map *map)
+bool	ft_check_size_map(t_data *data)
 {
-	if (map->width < 3 || map->height < 3)
-		return (1);
+	if (data->m_map.width < 3 || data->m_map.height < 3)
+		return (ft_error(data, "Invalid size map (min map 3x3)", 0));
 	return (0);
 }
 
@@ -41,13 +41,14 @@ bool	ft_check_line_map(t_data *data, char *line, int id_line)
 	if (ft_check_outside_map(&(data->m_map), line, id_line) == 0)
 	{
 		if (ft_check_nombre_player(&(data->m_player), line) == 1)
-			return (1);
+			return (ft_error(data,
+					"just 1 Player in map", id_line));
 		if (id_line == data->m_map.line_end
 			&& data->m_player.find_player == false)
 			return (1);
 		return (0);
 	}
-	return (1);
+	return (ft_error(data, "Invalid map", id_line));
 }
 
 bool	ft_read_map(t_data *data, char *file)
@@ -73,14 +74,12 @@ bool	ft_read_map(t_data *data, char *file)
 			error = 1;
 		free(line);
 	}
-	if (error == true)
-		printf("Error < line %d >\n", id_line);
 	return (error);
 }
 
 bool	ft_check_map2(t_data *data, char *file)
 {
-	if (ft_check_size_map(&(data->m_map)) == 0)
+	if (ft_check_size_map(data) == 0)
 	{
 		if (ft_read_map(data, file) == 0)
 			return (0);

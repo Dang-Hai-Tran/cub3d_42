@@ -42,24 +42,25 @@ bool	ft_check_position_0_and_player(char **map, int m, int n)
 	return (0);
 }
 
-bool	ft_check_inside_map2(t_map *map, char **tab)
+bool	ft_check_inside_map2(t_data *data, char **tab)
 {
 	int	m;
 	int	n;
 
 	m = 0;
-	while (m < map->height)
+	while (m < data->m_map.height)
 	{
 		n = 0;
-		while (n < map->width)
+		while (n < data->m_map.width)
 		{
-			if (m > 0 && m < map->height - 1)
+			if (m > 0 && m < data->m_map.height - 1)
 			{
 				if (tab[m][n] == '0' || tab[m][n] == 'N' || tab[m][n] == 'S'
 					|| tab[m][n] == 'W' || tab[m][n] == 'E')
 				{
 					if (ft_check_position_0_and_player(tab, m, n) == 1)
-						return (1);
+						return (ft_error(data,
+								"map open", data->m_map.line_start + m + 1));
 				}
 			}
 			n++;
@@ -89,7 +90,7 @@ bool	ft_check_inside_map(t_data *data, char *file)
 	}
 	map[i] = 0;
 	ft_set_value_to_map(&(data->m_map), file, map);
-	error = ft_check_inside_map2(&(data->m_map), map);
+	error = ft_check_inside_map2(data, map);
 	ft_free_map(&(data->m_map), map);
 	return (error);
 }

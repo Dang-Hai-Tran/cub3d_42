@@ -76,7 +76,7 @@ bool	ft_check_space_inside_texture(char *str)
 	return (0);
 }
 
-bool	ft_check_path_to_texture(char *str)
+bool	ft_check_path_to_texture(t_data *data, char *str)
 {
 	int		i;
 	int		m;
@@ -96,7 +96,7 @@ bool	ft_check_path_to_texture(char *str)
 		i++;
 	}
 	path[m] = 0;
-	if (ft_check_file(path, ".xpm") == 1)
+	if (ft_check_file(data, path, ".xpm") == 1)
 	{
 		free(path);
 		return (1);

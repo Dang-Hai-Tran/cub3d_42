@@ -15,9 +15,9 @@
 int	parsing_args(int argc, char **argv, t_data *data)
 {
 	if (argc != 2)
-		return (err_msg("Number arguments is invalid", FAIL));
-	if (ft_check_file(argv[1], ".cub") == 1)
-		return (FAIL);
+		return (ft_error(data, "Number arguments is invalid", 0));
+	if (ft_check_file(data, argv[1], ".cub") == 1)
+		return (1);
 	if (ft_check_nombre_line_in_file(argv[1]) == 1)
 		return (1);
 	ft_initialisation_data(data);
@@ -28,5 +28,5 @@ int	parsing_args(int argc, char **argv, t_data *data)
 	if (ft_check_inside_map(data, argv[1]) == 1)
 		return (1);
 	ft_get_data(data, argv[1]);
-	return (SUCCESS);
+	return (0);
 }

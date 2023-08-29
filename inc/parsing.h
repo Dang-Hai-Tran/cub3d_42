@@ -63,6 +63,7 @@ typedef struct s_data
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
+	bool		error;
 
 	t_texture	m_texture;
 	t_color		m_color;
@@ -75,7 +76,8 @@ void	ft_print_information(t_data *data);
 /*
 ft_check_file
 */
-bool	ft_check_file(char *file, char *type);
+bool	ft_error(t_data *data, char *str, int id_line);
+bool	ft_check_file(t_data *data, char *file, char *type);
 bool	ft_check_nombre_line_in_file(char *file);
 bool	ft_read_file(t_data *data, char *file);
 
@@ -90,7 +92,7 @@ ft_check_texture.c
 bool	ft_check_character_texture(char *str);
 bool	ft_check_identifiant_texture(t_texture *texture, char *str);
 bool	ft_check_space_inside_texture(char *str);
-bool	ft_check_path_to_texture(char *str);
+bool	ft_check_path_to_texture(t_data *data, char *str);
 bool	ft_check_double_texture(t_texture *texture, int id_line);
 
 /*
@@ -111,7 +113,7 @@ char	*ft_get_char_number_color(char *str);
 /*
 ft_check_map.c
 */
-bool	ft_check_map(t_map *map, char *line, int id_line);
+bool	ft_check_map(t_data *data, char *line, int id_line);
 bool	ft_check_map2(t_data *data, char *file);
 bool	ft_check_line_start_and_end(char *str);
 bool	ft_check_line_map_open(char *str);
