@@ -53,7 +53,7 @@ $(LIBDIR):
 	done
 
 bonus:
-	make all BONUS=1
+	make re BONUS=1
 
 clean:
 	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
@@ -83,4 +83,4 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

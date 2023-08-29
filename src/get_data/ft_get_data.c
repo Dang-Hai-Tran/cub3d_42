@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:49:52 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:31:09 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/29 18:13:31 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_read_file3(t_data *data, char *file)
 
 	fd = open(file, O_RDONLY);
 	id_line = 0;
-	while (42)
+	while (true)
 	{
 		id_line++;
 		line = ft_gnl(fd);
@@ -58,7 +58,6 @@ void	ft_read_file3(t_data *data, char *file)
 
 void	ft_get_data(t_data *data, char *file)
 {
-	printf("--> OK get data\n");
 	ft_read_file3(data, file);
 	ft_get_map(data, file);
 	return ;
