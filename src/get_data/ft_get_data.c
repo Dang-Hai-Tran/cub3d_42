@@ -54,6 +54,7 @@ void	ft_read_file3(t_data *data, char *file)
 			ft_get_color(data, line, id_line);
 		free(line);
 	}
+	close(fd);
 }
 
 void	ft_get_data(t_data *data, char *file)

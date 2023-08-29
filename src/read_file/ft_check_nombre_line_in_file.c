@@ -28,6 +28,7 @@ bool	ft_check_nombre_line_in_file(char *file, t_data *data)
 		free(line);
 		nbr_line++;
 	}
+	close(fd);
 	if (nbr_line < 9)
 		return (ft_error(data, "file has 9 lines minimum", 0));
 	return (0);

@@ -31,15 +31,19 @@ bool	ft_check_open_file(t_data *data, char *file)
 	{
 		printf("Error: '%s' isn't a file !\n", file);
 		data->error = 1;
+		close(fd);
 		return (1);
 	}
+	close(fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error: can't open '%s' !\n", file);
 		data->error = 1;
+		close(fd);
 		return (1);
 	}
+	close(fd);
 	return (0);
 }
 

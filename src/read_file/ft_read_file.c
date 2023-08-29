@@ -94,5 +94,6 @@ bool	ft_read_file(t_data *data, char *file)
 		error = ft_check_line(data, line, id_line);
 		free(line);
 	}
+	close(fd);
 	return (error);
 }

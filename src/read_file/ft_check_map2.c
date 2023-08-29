@@ -74,6 +74,7 @@ bool	ft_read_map(t_data *data, char *file)
 			error = 1;
 		free(line);
 	}
+	close(fd);
 	return (error);
 }
 

@@ -48,4 +48,5 @@ void	ft_set_value_to_map(t_map *map, char *file, char **tab)
 		}
 		free(line);
 	}
+	close(fd);
 }
