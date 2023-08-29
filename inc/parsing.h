@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:48:24 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:56:13 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:19:03 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ ft_check_file
 */
 bool	ft_error(t_data *data, char *str, int id_line);
 bool	ft_check_file(t_data *data, char *file, char *type);
-bool	ft_check_nombre_line_in_file(char *file);
+bool	ft_check_nombre_line_in_file(char *file, t_data *data);
 bool	ft_read_file(t_data *data, char *file);
 
 /*

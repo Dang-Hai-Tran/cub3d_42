@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 19:06:21 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:31:09 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:05:54 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	ft_check_inside_map(t_data *data, char *file)
 		map[i] = (char *)malloc((data->m_map.width + 1) * sizeof(char));
 		if (!map)
 			return (1);
-		ft_bzero(map[i], data->m_map.width);
+		ft_bzero(map[i], data->m_map.width + 1);
 		i++;
 	}
 	map[i] = 0;

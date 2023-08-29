@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 16:46:57 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 14:08:00 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:17:09 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ static int	*xpm_to_img(t_display *display, char *path)
 	int		tex_size;
 
 	init_texture(display, &image, path);
-	buf = ft_calloc(display->texinfo->size * display->texinfo->size, \
-	sizeof(int));
+	tex_size = display->texinfo->size;
+	buf = ft_calloc(tex_size * tex_size, sizeof(int));
 	if (!buf)
 		free_exit(display, err_msg("calloc buf xpm to img", 1));
 	y = 0;
-	tex_size = display->texinfo->size;
 	while (y < tex_size)
 	{
 		x = 0;

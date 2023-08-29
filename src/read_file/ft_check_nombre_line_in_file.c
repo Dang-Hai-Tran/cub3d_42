@@ -6,13 +6,13 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:10:13 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:31:09 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:19:33 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	ft_check_nombre_line_in_file(char *file)
+bool	ft_check_nombre_line_in_file(char *file, t_data *data)
 {
 	int		fd;
 	int		nbr_line;
@@ -29,6 +29,6 @@ bool	ft_check_nombre_line_in_file(char *file)
 		nbr_line++;
 	}
 	if (nbr_line < 9)
-		return (ft_error("file has 9 lines minimum", 0));
+		return (ft_error(data, "file has 9 lines minimum", 0));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:42 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:54:56 by datran           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:09:04 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	ft_get_map(t_data *data, char *file)
 		map[i] = (char *)malloc((data->m_map.width + 1) * sizeof(char));
 		if (!map)
 			return ;
-		ft_bzero(map[i], data->m_map.width);
+		ft_bzero(map[i], data->m_map.width + 1);
 		i++;
 	}
 	map[i] = 0;
 	ft_set_value_to_map(&(data->m_map), file, map);
 	ft_get_infor_player(&(data->m_map), &(data->m_player), map);
 	data->map = map;
-	ft_print_information(data);
+	// ft_print_information(data);
 }
