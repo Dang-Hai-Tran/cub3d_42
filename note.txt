@@ -50,3 +50,10 @@ file layout :
 (Any amount of whitespaces or newlines)
 
 [MAP]
+
+{{{{{TEST}}}}}
+color_invalid_rgb.cub: not specify error type in rgb color number
+color_missing_ceiling_rgb.cub: not specify error type in missing rgb value
+color_missing_floor_rgb.cub: not specity error type in missing rgb value
+color_missing.cub: not specify error in missing floor and ceiling line
+....
