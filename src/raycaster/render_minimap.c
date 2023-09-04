@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/28 18:33:02 by datran            #+#    #+#             */
-/*   Updated: 2023/09/03 12:16:31 by datran           ###   ########.fr       */
+/*   Created: 2023/08/30 17:00:01 by datran            #+#    #+#             */
+/*   Updated: 2023/09/04 15:16:14 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned long	convert_rgb_to_hex(int *rgb)
+void	render_minimap(t_display *display)
 {
-	int		r;
-	int		g;
-	int		b;
-	unsigned long ret;
+	t_minimap		minimap;
 
-	r = rgb[0];
-	g = rgb[1];
-	b = rgb[2];
-	ret = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-	return (ret);
-}
-
-int		*get_arr_rgb(int r, int g, int b)
-{
-	int		*rgb;
-
-	rgb = ft_calloc(3, sizeof(int));
-	rgb[0] = r;
-	rgb[1] = g;
-	rgb[2] = b;
-	return (rgb);
+	init_minimap(&minimap, display);
+	minimap.map = create_minimap_map(&minimap, display);
+	render_minimap_image(&minimap, display);
+	free_arr((void **)minimap.map);
 }

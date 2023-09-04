@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 18:42:38 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/04 15:15:04 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ typedef struct s_display
 	char			**map;
 	int				**texbuffer;
 	int				**texpixels;
+	t_img			minimap;
 }	t_display;
 
 #endif

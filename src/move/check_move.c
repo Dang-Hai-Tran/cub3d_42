@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:11:29 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 14:11:53 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:19:01 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static bool	check_pos_wall_collision(t_display *display, double pos_x, \
 double pos_y)
 {
-	if (display->map[(int)pos_x][(int)pos_y] == '0')
-		return (true);
-	return (false);
+	if (display->map[(int)pos_y][(int)pos_x] != '0')
+		return (false);
+	return (true);
 }
 
 static bool	check_pos_in_map(t_display *display, double pos_x, double pos_y)

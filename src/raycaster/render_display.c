@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 09:42:18 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 14:13:50 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/04 10:08:38 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static void	render_raycaster(t_display *display)
 void	render_images(t_display *display)
 {
 	render_raycaster(display);
-	// if (BONUS)
-	// 	render_minimap(display);
+	if (BONUS)
+		render_minimap(display);
 }
 
 int	render_display(t_display *display)

@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:36 by datran            #+#    #+#             */
-/*   Updated: 2023/08/28 16:44:52 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:09:41 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_player		t_player;
 typedef struct s_display	t_display;
 
 # define MOVE_SPEED 0.01
-# define ROTATE_SPEED 0.01
+# define ROTATE_SPEED 0.02
 
 void	input_listen(t_display *display);
 int		check_move(t_display *display, double npos_x, double npos_y);
