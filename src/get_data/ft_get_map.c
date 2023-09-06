@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:42 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/29 17:09:04 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:13:39 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_get_infor_player(t_map *map, t_pplayer *player, char **tab)
 		n = 0;
 		while (n < map->width)
 		{
-			if (tab[m][n] == 0 || tab[m][n] == ' ')
-				tab[m][n] = '0';
+			if (tab[m][n] == 0)
+				tab[m][n] = ' ';
 			if (m > 0 && m < map->height - 1)
 			{
 				if (tab[m][n] == 'N' || tab[m][n] == 'S'

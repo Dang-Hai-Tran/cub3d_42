@@ -57,3 +57,7 @@ color_missing_ceiling_rgb.cub: not specify error type in missing rgb value
 color_missing_floor_rgb.cub: not specity error type in missing rgb value
 color_missing.cub: not specify error in missing floor and ceiling line
 ....
+
+color_missing_floor_rgb.cub
+map_first.cub
+map_only.cub

@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:49:52 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/29 18:13:31 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:06:19 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_get_str(char *str)
 	return (new_str);
 }
 
-void	ft_read_file3(t_data *data, char *file)
+void	ft_read_map_file2(t_data *data, char *file)
 {
 	int		fd;
 	int		id_line;
@@ -59,7 +59,7 @@ void	ft_read_file3(t_data *data, char *file)
 
 void	ft_get_data(t_data *data, char *file)
 {
-	ft_read_file3(data, file);
+	ft_read_map_file2(data, file);
 	ft_get_map(data, file);
 	return ;
 }

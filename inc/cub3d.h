@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 23:25:24 by datran            #+#    #+#             */
-/*   Updated: 2023/09/04 15:15:04 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:48:17 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@
 
 # ifndef BONUS
 #  define BONUS 0
+# endif
+
+# ifndef DEBUG
+#  define DEBUG 0
 # endif
 
 typedef enum e_dir			t_dir;

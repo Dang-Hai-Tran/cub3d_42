@@ -5,85 +5,110 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 18:10:48 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:31:09 by datran           ###   ########.fr       */
+/*   Created: 2023/09/04 13:00:40 by xuluu             #+#    #+#             */
+/*   Updated: 2023/09/06 15:45:24 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	ft_check_size_map(t_data *data)
+void	ft_free_map(t_map *map, char **tab)
 {
-	if (data->m_map.width < 3 || data->m_map.height < 3)
-		return (ft_error(data, "Invalid size map (min map 3x3)", 0));
+	int	m;
+	int	n;
+
+	m = 0;
+	while (m < map->height)
+	{
+		n = 0;
+		while (n < map->width)
+			n++;
+		free(tab[m]);
+		m++;
+	}
+	free(tab);
+}
+
+bool	ft_check_position_0_and_player(char **map, int m, int n)
+{
+	if (n == 0)
+		return (1);
+	if (map[m - 1][n] == 0 || map[m - 1][n] == ' ')
+		return (1);
+	if (map[m + 1][n] == 0 || map[m + 1][n] == ' ')
+		return (1);
+	if (map[m][n - 1] == 0 || map[m][n - 1] == ' ')
+		return (1);
+	if (map[m][n + 1] == 0 || map[m][n + 1] == ' ')
+		return (1);
 	return (0);
 }
 
-bool	ft_check_outside_map(t_map *map, char *line, int id_line)
+bool	ft_check_open(t_data *data, char **tab, int m, int n)
 {
-	if (ft_check_line_space(line) == 0)
+	if (data->m_map.line_start + m == data->m_map.line_start
+		|| data->m_map.line_start + m == data->m_map.line_end
+		|| ft_check_position_0_and_player(tab, m, n) == 1)
 	{
-		if (id_line == map->line_start
-			|| id_line == map->line_end)
-		{
-			if (ft_check_line_start_and_end(line) == 0)
-				return (0);
-		}
-		else if (ft_check_line_map_open(line) == 0)
-			return (0);
+		data->error = 1;
+		if (tab[m][n] != '0')
+			printf("Error: [%d] Player is not surrounded by walls !\n",
+				data->m_map.line_start + m);
+		else
+			printf("Error: [%d] Floor is not surrounded by walls !\n",
+				data->m_map.line_start + m);
 		return (1);
 	}
 	return (0);
 }
 
-bool	ft_check_line_map(t_data *data, char *line, int id_line)
+bool	ft_check_inside_map(t_data *data, char **tab)
 {
-	if (ft_check_outside_map(&(data->m_map), line, id_line) == 0)
+	int	m;
+	int	n;
+
+	m = 0;
+	while (m < data->m_map.height)
 	{
-		if (ft_check_nombre_player(&(data->m_player), line) == 1)
-			return (ft_error(data,
-					"just 1 Player in map", id_line));
-		if (id_line == data->m_map.line_end
-			&& data->m_player.find_player == false)
-			return (1);
-		return (0);
+		n = 0;
+		while (n < data->m_map.width)
+		{
+			if (tab[m][n] == '0' || tab[m][n] == 'N' || tab[m][n] == 'S'
+				|| tab[m][n] == 'W' || tab[m][n] == 'E')
+			{
+				if (ft_check_open(data, tab, m, n) == 1)
+					return (1);
+			}
+			n++;
+		}
+		m++;
 	}
-	return (ft_error(data, "Invalid map", id_line));
+	return (0);
 }
 
-bool	ft_read_map(t_data *data, char *file)
+bool	ft_check_map_open(t_data *data, char *file)
 {
-	int		fd;
-	int		id_line;
+	int		i;
 	bool	error;
-	char	*line;
+	char	**map;
 
-	fd = open(file, O_RDONLY);
-	id_line = 0;
-	error = false;
-	while (error == false)
+	map = (char **)malloc((data->m_map.height + 1) * sizeof(char *));
+	if (!map)
+		return (1);
+	i = 0;
+	while (i < data->m_map.height)
 	{
-		id_line++;
-		line = ft_gnl(fd);
-		if (!line)
-			break ;
-		if (id_line >= data->m_map.line_start
-			&& id_line <= data->m_map.line_end)
-			error = ft_check_line_map(data, line, id_line);
-		else if (id_line > data->m_map.line_end)
-			error = 1;
-		free(line);
+		map[i] = (char *)malloc((data->m_map.width + 1) * sizeof(char));
+		if (!map)
+			return (1);
+		ft_bzero(map[i], data->m_map.width + 1);
+		i++;
 	}
-	close(fd);
+	map[i] = 0;
+	ft_set_value_to_map(&(data->m_map), file, map);
+	error = ft_check_inside_map(data, map);
+	if (error == 0)
+		error = ft_find_player(data);
+	ft_free_map(&(data->m_map), map);
 	return (error);
-}
-
-bool	ft_check_map2(t_data *data, char *file)
-{
-	if (ft_check_size_map(data) == 0)
-	{
-		if (ft_read_map(data, file) == 0)
-			return (0);
-	}
-	return (1);
 }

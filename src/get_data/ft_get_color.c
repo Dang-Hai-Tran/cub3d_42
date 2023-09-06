@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:18 by xuluu             #+#    #+#             */
-/*   Updated: 2023/08/28 16:31:09 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:05:34 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	*ft_get_color2(char *str)
 	{
 		if (str[i] != ',')
 		{
-			nbr = ft_get_char_number_color(&str[i]);
+			nbr = ft_get_str_number(&str[i]);
 			tab_color[m] = ft_atoi(nbr);
 			m++;
 			i += ft_strlen(nbr);
