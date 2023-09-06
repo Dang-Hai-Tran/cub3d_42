@@ -62,5 +62,4 @@ void	ft_get_map(t_data *data, char *file)
 	ft_set_value_to_map(&(data->m_map), file, map);
 	ft_get_infor_player(&(data->m_map), &(data->m_player), map);
 	data->map = map;
-	// ft_print_information(data);
 }

@@ -52,6 +52,34 @@ bool	ft_check_open_file(char *file, int id_line, char *direc)
 	return (0);
 }
 
+bool	ft_is_empty_file(char *file, int id_line, char *direc)
+{
+	int		fd;
+	int		nb_line;
+	char	*line;
+
+	fd = open(file, O_RDONLY);
+	nb_line = 0;
+	while (nb_line >= 0)
+	{
+		line = ft_gnl_bonus(fd);
+		if (!line)
+			break ;
+		nb_line++;
+		free(line);
+	}
+	if (nb_line == 0)
+	{
+		if (id_line == 0)
+			printf("Error: '%s' is empty file !\n", file);
+		else
+			printf("Error: [%d] '%s' is empty file (%s) !\n",
+				id_line, file, direc);
+		return (1);
+	}
+	return (0);
+}
+
 bool	ft_check_file2(char *file, char *type, int id_line, char *direc)
 {
 	int		i;
@@ -69,6 +97,8 @@ bool	ft_check_file2(char *file, char *type, int id_line, char *direc)
 		return (1);
 	}
 	if (ft_check_open_file(file, id_line, direc) == 1)
+		return (1);
+	if (ft_is_empty_file(file, id_line, direc) == 1)
 		return (1);
 	return (0);
 }
