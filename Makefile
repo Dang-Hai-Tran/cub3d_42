@@ -16,7 +16,8 @@ LIBS      := $(shell find $(LIBDIR) -type f -name '*.a')
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)%,$(addsuffix .d,$(basename $(SOURCES))))
 BONUS     := 0
-CFLAGS    := -Wall -Wextra -Werror -g -DBONUS=$(BONUS)
+DEBUG     := 0
+CFLAGS    := -Wall -Wextra -Werror -g -DBONUS=$(BONUS) -DDEBUG=$(DEBUG)
 INC       := -Iinc -Isrc
 
 LIB_DIRS  := $(shell find $(LIBSRCDIR) -type d -exec test -e '{}/Makefile' ';' -print)
@@ -55,6 +56,9 @@ $(LIBDIR):
 bonus:
 	make all BONUS=1
 
+debug:
+	make all DEBUG=1
+
 clean:
 	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
 	@rm -rf $(BUILDDIR) 
@@ -83,4 +87,4 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus debug
