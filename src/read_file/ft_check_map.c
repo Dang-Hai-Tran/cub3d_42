@@ -68,6 +68,8 @@ bool	ft_check_map(t_data *data, char *str)
 		data->m_map.line_start = data->m_line.id_line;
 		data->m_map.find_map = true;
 	}
+	if (ft_check_find_elements(data) == 0)
+		return (0);
 	if (ft_check_empty_line(data) == 1)
 		return (1);
 	ft_get_size_map(data, str);

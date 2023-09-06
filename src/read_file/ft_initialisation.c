@@ -30,6 +30,7 @@ void	ft_initialisation_color(t_color *color)
 	color->find_c = false;
 	color->line_f = 0;
 	color->line_c = 0;
+	color->nb_number = 0;
 }
 
 void	ft_initialisation_map(t_map *map)

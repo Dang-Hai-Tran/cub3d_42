@@ -87,7 +87,7 @@ bool	ft_check_texture(t_data *data, char *str)
 		return (1);
 	if (ft_check_double_texture(&(data->m_texture), data->m_line.id_line) == 1)
 	{
-		printf("Error: [%d] double texture of (%s) !\n",
+		printf("Error: [%d] double texture (%s) !\n",
 			data->m_line.id_line, ft_error_texture(&(data->m_texture)));
 		data->error = 1;
 		return (1);

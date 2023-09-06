@@ -94,9 +94,7 @@ bool	ft_read_map_file(t_data *data, char *file)
 		free(data->m_line.line);
 	}
 	if (error == 0)
-	{
 		error = ft_check_file_status(data, file);
-	}
 	close(fd);
 	return (error);
 }

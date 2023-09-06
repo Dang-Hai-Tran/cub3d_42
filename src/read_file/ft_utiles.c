@@ -36,7 +36,8 @@ int	ft_ignore_space_end(char *str)
 
 bool	ft_check_position_map(t_data *data)
 {
-	if (data->m_map.find_map == true)
+	if (data->m_map.find_map == true
+		&& ft_check_find_elements(data) == false)
 	{
 		data->error = 1;
 		printf("Error: [%d] invalid position of Map !\n",

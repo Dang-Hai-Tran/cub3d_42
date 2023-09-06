@@ -35,6 +35,7 @@ typedef struct s_color
 	bool	find_c;
 	int		line_f;
 	int		line_c;
+	int		nb_number;
 }	t_color;
 
 typedef struct s_map
@@ -93,6 +94,7 @@ bool	ft_check_file_status(t_data *data, char *file);
 bool	ft_check_position_map(t_data *data);
 bool	ft_check_start_space(t_data *data);
 bool	ft_check_end_space(t_data *data, char *str);
+bool	ft_check_find_elements(t_data *data);
 
 /*
 texture
