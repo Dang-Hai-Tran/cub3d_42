@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:30:39 by xuluu             #+#    #+#             */
-/*   Updated: 2023/09/06 15:06:19 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:23:58 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	ft_check_position_map(t_data *data)
 		&& ft_check_find_elements(data) == false)
 	{
 		data->error = 1;
-		printf("Error: [%d] invalid position of Map !\n",
+		printf("Error: [%d] invalid position of map !\n",
 			data->m_map.line_start);
 		return (1);
 	}

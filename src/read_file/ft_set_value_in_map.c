@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:10:14 by xuluu             #+#    #+#             */
-/*   Updated: 2023/09/06 15:06:19 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:33:44 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_set_value_to_map(t_map *map, char *file, char **tab)
 	while (42)
 	{
 		id_line++;
-		line = ft_gnl(fd);
+		line = ft_gnl_bonus(fd);
 		if (!line)
 			break ;
 		if (id_line >= map->line_start

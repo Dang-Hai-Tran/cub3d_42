@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:49:52 by xuluu             #+#    #+#             */
-/*   Updated: 2023/09/06 15:06:19 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:34:01 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_read_map_file2(t_data *data, char *file)
 	while (true)
 	{
 		id_line++;
-		line = ft_gnl(fd);
+		line = ft_gnl_bonus(fd);
 		if (!line)
 			break ;
 		if (id_line == data->m_texture.line_no

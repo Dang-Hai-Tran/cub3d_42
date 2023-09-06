@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:26:59 by datran            #+#    #+#             */
-/*   Updated: 2023/07/23 11:17:53 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:30:20 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		ft_is_argument(int c);
 char	*ft_strchr_gnl(char *str, int c);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 char	*ft_gnl(int fd);
+char	*ft_gnl_bonus(int fd);
 
 // ft_readline
 char	*ft_readline(int fd);

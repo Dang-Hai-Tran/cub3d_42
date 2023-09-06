@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:42:46 by datran            #+#    #+#             */
-/*   Updated: 2023/05/01 20:20:40 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:28:59 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,20 @@ char	*ft_gnl(int fd)
 		return (NULL);
 	line = ft_get_line(file_content);
 	file_content = ft_next_content(file_content);
+	return (line);
+}
+
+char	*ft_gnl_bonus(int fd)
+{
+	char		*line;
+	static char	*file_content[257];
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
+		return (0);
+	file_content[fd] = ft_read_file(fd, file_content[fd]);
+	if (!file_content[fd])
+		return (NULL);
+	line = ft_get_line(file_content[fd]);
+	file_content[fd] = ft_next_content(file_content[fd]);
 	return (line);
 }

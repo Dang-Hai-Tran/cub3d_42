@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 13:29:17 by xuluu             #+#    #+#             */
-/*   Updated: 2023/09/06 15:06:19 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:33:52 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	ft_read_map_file(t_data *data, char *file)
 	error = false;
 	while (error == false)
 	{
-		data->m_line.line = ft_gnl(fd);
+		data->m_line.line = ft_gnl_bonus(fd);
 		if (!data->m_line.line)
 			break ;
 		data->m_line.id_line++;
