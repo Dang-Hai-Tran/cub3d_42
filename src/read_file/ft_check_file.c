@@ -27,7 +27,6 @@ bool	ft_is_a_file(char *file, int id_line, char *direc)
 		close(fd);
 		return (1);
 	}
-	close(fd);
 	return (0);
 }
 
@@ -45,7 +44,6 @@ bool	ft_check_open_file(char *file, int id_line, char *direc)
 		else
 			printf("Error: [%d] can't open '%s' of (%s) !\n",
 				id_line, file, direc);
-		close(fd);
 		return (1);
 	}
 	close(fd);
@@ -68,6 +66,7 @@ bool	ft_is_empty_file(char *file, int id_line, char *direc)
 		nb_line++;
 		free(line);
 	}
+	close(fd);
 	if (nb_line == 0)
 	{
 		if (id_line == 0)
