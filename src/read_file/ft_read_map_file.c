@@ -83,14 +83,15 @@ bool	ft_read_map_file(t_data *data, char *file)
 	fd = open(file, O_RDONLY);
 	data->m_line.id_line = 0;
 	error = false;
-	while (error == false)
+	while (42)
 	{
 		data->m_line.line = ft_gnl_bonus(fd);
 		if (!data->m_line.line)
 			break ;
 		data->m_line.id_line++;
 		data->error = 0;
-		error = ft_determine_line(data);
+		if (error == 0)
+			error = ft_determine_line(data);
 		free(data->m_line.line);
 	}
 	if (error == 0)

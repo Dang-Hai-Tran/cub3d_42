@@ -43,6 +43,7 @@ bool	ft_check_nomber_number(t_data *data, char *str)
 		data->error = 1;
 		printf("Error: [%d] there are not enough numbers (%s) of (%s) !\n",
 			data->m_line.id_line, str, ft_error_color(&(data->m_color)));
+		free(str);
 		return (1);
 	}
 	return (0);
