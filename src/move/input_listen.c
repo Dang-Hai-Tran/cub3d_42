@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:24:24 by datran            #+#    #+#             */
-/*   Updated: 2023/09/04 16:16:24 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/07 13:39:44 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void	input_listen(t_display *display)
 	mlx_hook(display->win, KeyRelease, KeyReleaseMask, \
 	key_release_handler, display);
 	if (BONUS)
-		mlx_hook(display->win, MotionNotify, PointerMotionMask, mouse_motion_handler, display);
+		mlx_hook(display->win, MotionNotify, \
+		PointerMotionMask, mouse_motion_handler, display);
 }

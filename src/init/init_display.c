@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:23:02 by datran            #+#    #+#             */
-/*   Updated: 2023/09/04 11:22:58 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/07 13:38:21 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_player_zero(t_player *player, t_data *data)
 		player->dir = NORTH;
 	if (data->m_player.p_char == 'S')
 		player->dir = SOUTH;
-	if (data->m_player.p_char =='E')
+	if (data->m_player.p_char == 'E')
 		player->dir = EAST;
 	if (data->m_player.p_char == 'W')
 		player->dir = WEST;

@@ -6,13 +6,14 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:50:56 by datran            #+#    #+#             */
-/*   Updated: 2023/09/04 15:13:50 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/07 13:43:48 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_minimap_tile_par_pixels(t_minimap *minimap, int tile_x, int tile_y, int color)
+static void	draw_minimap_tile_par_pixels(t_minimap *minimap, int tile_x, \
+int tile_y, int color)
 {
 	int		i;
 	int		j;
@@ -62,7 +63,9 @@ static void	draw_minimap_border(t_minimap *minimap, int color)
 		x = 0;
 		while (x < size)
 		{
-			if (x < MINIMAP_DISPLAY_BORDER || x > size - MINIMAP_DISPLAY_BORDER || y < MINIMAP_DISPLAY_BORDER || y > size - MINIMAP_DISPLAY_BORDER)
+			if (x < MINIMAP_DISPLAY_BORDER || x > \
+			size - MINIMAP_DISPLAY_BORDER || y < MINIMAP_DISPLAY_BORDER \
+			|| y > size - MINIMAP_DISPLAY_BORDER)
 				set_image_pixel(minimap->image, x, y, color);
 			x++;
 		}
@@ -81,7 +84,8 @@ static void	draw_minimap_image(t_minimap *minimap)
 		x = 0;
 		while (x < minimap->size)
 		{
-			if (!minimap->map[y] || !minimap->map[y][x] || minimap->map[y][x] == 0)
+			if (!minimap->map[y] || !minimap->map[y][x] || \
+			minimap->map[y][x] == 0)
 				break ;
 			draw_minimap_tile(minimap, x, y);
 			x++;

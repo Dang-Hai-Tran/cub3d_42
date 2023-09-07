@@ -6,13 +6,13 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:46:23 by colin             #+#    #+#             */
-/*   Updated: 2023/09/06 15:48:33 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/07 13:44:21 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void run_debug(t_display display)
+static void	run_debug(t_display display)
 {
 	int		i;
 
