@@ -27,11 +27,14 @@ void	ft_get_texture2(t_data *data, char *str, int id_line)
 void	ft_get_texture(t_data *data, char *str, int id_line)
 {
 	int		i;
-	char	*str_texture;
+	int		end;
+	char	*path;
 
-	i = 2;
+	i = ft_ignore_space_start(str);
+	i += 2;
 	while (str[i] && str[i] == ' ')
 		i++;
-	str_texture = ft_get_str(&str[i]);
-	ft_get_texture2(data, str_texture, id_line);
+	end = ft_ignore_space_end(str);
+	path = ft_copy_str(str, i, end);
+	ft_get_texture2(data, path, id_line);
 }

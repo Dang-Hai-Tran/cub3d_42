@@ -81,8 +81,6 @@ bool	ft_check_texture(t_data *data, char *str)
 {
 	if (ft_check_identifiant_texture(data, str) == 1)
 		return (1);
-	if (ft_check_start_space(data) == 1)
-		return (1);
 	if (ft_check_position_map(data) == 1)
 		return (1);
 	if (ft_check_double_texture(&(data->m_texture), data->m_line.id_line) == 1)
@@ -93,8 +91,6 @@ bool	ft_check_texture(t_data *data, char *str)
 		return (1);
 	}
 	if (ft_check_path(data, &str[2]) == 1)
-		return (1);
-	if (ft_check_end_space(data, str) == 1)
 		return (1);
 	return (0);
 }

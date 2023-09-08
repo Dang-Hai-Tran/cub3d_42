@@ -43,12 +43,15 @@ int	*ft_get_color2(char *str)
 void	ft_get_color(t_data *data, char *str, int id_line)
 {
 	int		i;
+	int		end;
 	char	*str_color;
 
-	i = 1;
+	i = ft_ignore_space_start(str);
+	i += 1;
 	while (str[i] && str[i] == ' ')
 		i++;
-	str_color = ft_get_str(&str[i]);
+	end = ft_ignore_space_end(str);
+	str_color = ft_copy_str(str, i, end);
 	if (id_line == data->m_color.line_f)
 		data->rgb_floor = ft_get_color2(str_color);
 	else if (id_line == data->m_color.line_c)

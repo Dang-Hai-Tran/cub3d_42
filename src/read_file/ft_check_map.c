@@ -75,7 +75,5 @@ bool	ft_check_map(t_data *data, char *str)
 	ft_get_size_map(data, str);
 	if (ft_check_nomber_player(data, str) == 1)
 		return (1);
-	if (ft_check_end_space(data, str) == 1)
-		return (1);
 	return (0);
 }
