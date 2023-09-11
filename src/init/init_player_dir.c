@@ -6,7 +6,7 @@
 /*   By: datran <datran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:29:42 by datran            #+#    #+#             */
-/*   Updated: 2023/08/23 16:22:20 by datran           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:23:05 by datran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ static void	init_player_east_west(t_player *player)
 {
 	if (player->dir == EAST)
 	{
-		player->dir_x = -1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = -0.66;
-	}
-	if (player->dir == WEST)
-	{
 		player->dir_x = 1;
 		player->dir_y = 0;
 		player->plane_x = 0;
 		player->plane_y = 0.66;
+	}
+	if (player->dir == WEST)
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
 	}
 }
 

@@ -1,5 +1,5 @@
-PROJECT_NAME := cub3d
-BIN_NAME  := cub3d
+PROJECT_NAME := cub3D
+BIN_NAME  := cub3D
 CC        := cc
 ROOTDIR   := .
 SRCDIR    := src
