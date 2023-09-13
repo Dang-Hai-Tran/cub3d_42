@@ -1,90 +1,55 @@
-PROJECT_NAME := cub3D
-BIN_NAME  := cub3D
-CC        := cc
-ROOTDIR   := .
-SRCDIR    := src
-HEADERDIR := inc
-LIBDIR    := lib
-BUILDDIR  := build
-BINDIR    := bin
-LIBSRCDIR := libraries
-TARGET    := $(BINDIR)/$(BIN_NAME)
-SOURCES   := $(shell find $(SRCDIR) -type f -name '*.c' | grep -v tests)
-HEADERS   := $(shell find $(HEADERDIR) -type f -name '*.h' | grep -v tests)
-LIB       := -L./lib -lft -lmlx -lXext -lX11 -lm -lz
-LIBS      := $(shell find $(LIBDIR) -type f -name '*.a')
-OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
-DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)%,$(addsuffix .d,$(basename $(SOURCES))))
-BONUS     := 0
-DEBUG     := 0
-CFLAGS    := -Wall -Wextra -Werror -g -DBONUS=$(BONUS) -DDEBUG=$(DEBUG)
-INC       := -Iinc -Isrc
+NAME		=	cub3D
+LIBFT		=	libs/libft/libft.a
+MLX			=	libs/minilibx/libmlx.a
+CC			=	cc
 
-LIB_DIRS  := $(shell find $(LIBSRCDIR) -type d -exec test -e '{}/Makefile' ';' -print)
+SRCS_DIR	=	src/
+SRCS		=	$(shell find $(SRCS_DIR) -type f -name '*.c')
+OBJS		=	$(SRCS:%.c=%.o)
 
-RESET=`tput sgr0`
-GREEN=`tput setaf 2`
-RED=`tput setaf 1`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
+BONUS		=	0
+DEBUG		=	0
 
-define print_yellow
-	echo "$(YELLOW)$(1)$(RESET)"
-endef
+LIBFTFLAGS			=		-Llibs/libft -lft
+MLXFLAGS			=		-Llibs/minilibx -lmlx -lXext -lX11 -lm -lz
 
-define print_green
-	echo "$(GREEN)$(1)$(RESET)"
-endef
 
-define print_red
-	echo "$(RED)$(1)$(RESET)"
-endef
+CFLAGS	=	-Wall -Wextra -Werror -I./inc/ -g -DBONUS=$(BONUS) -DDEBUG=$(DEBUG)
+RM		=	rm -f
 
-all: $(LIBDIR) $(BINDIR) $(BUILDDIR) $(OBJECTS)
-	@$(call print_green,"Linking object files")
-	@$(CC) -o $(TARGET) $(OBJECTS) $(LIB)
-	@printf "$(RED)$(TARGET)$(RESET)$(GREEN) has been created!\n$(RESET)";
-
-$(LIBDIR):
-	@mkdir -p $(LIBDIR)
-	@for dir in $(LIB_DIRS); do \
-		printf "$(BLUE)Making $(RESET)$(RED)$$dir\n$(RESET)"; \
-		make -C $$dir && mv $$dir/*.a $(LIBDIR)/; \
-	done
-
+all:		$(NAME)
 bonus:
-	make all BONUS=1
-
+			make fclean && make all BONUS=1
 debug:
-	make all DEBUG=1
+			make fclean && make all DEBUG=1
+
+%.o:		%.c
+			$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME):	$(OBJS) $(LIBFT) $(MLX)
+			$(CC) $(OBJS) $(CFLAGS) $(LIBFTFLAGS) $(MLXFLAGS) -o $(NAME)
+
+$(LIBFT):
+			make -C libs/libft
+
+$(MLX):
+			make -C libs/minilibx
 
 clean:
-	@printf "$(BLUE)Deleting the $(RESET)$(BUILDDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
-	@rm -rf $(BUILDDIR) 
-	@for dir in $(LIB_DIRS); do \
-		make -C $$dir clean; \
-	done
+			make -C libs/libft clean
+			make -C libs/minilibx clean
 
-fclean: clean
-	@printf "$(BLUE)Deleting the $(RESET)$(BINDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
-	@rm -rf $(BINDIR);
-	@printf "$(BLUE)Deleting the $(RESET)$(LIBDIR) directory in $(RED)$(PROJECT_NAME)\n$(RESET)";
-	@rm -rf $(LIBDIR)
+fclean:		clean
+			$(RM) $(NAME) $(OBJS)
+			$(RM) $(LIBFT) libs/minilibx/libmlx.a libs/minilibx/libmlx_Linux.a
 
-re: fclean all
+re:			fclean all
 
-$(BUILDDIR) :
-	@mkdir -p $(BUILDDIR)
+git:
+			@git add -A
+			@git commit -m "$m"
+			@git push
+			@echo "Commit sent to GitHub"
+# Use make git m="msg to commit"
 
-$(BINDIR):
-	@mkdir -p $(BINDIR)
-	
-$(BUILDDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
-	@$(CC) $(CFLAGS) $(INC) -M $< -MT $@ > $(@:.o=.d)
-
--include $(DEPS)
-
-.PHONY: all clean fclean re bonus debug
+.PHONY:		all clean fclean re bonus debug git
